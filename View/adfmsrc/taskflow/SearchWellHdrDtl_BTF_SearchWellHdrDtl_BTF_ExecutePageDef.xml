@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.9.14"
+                id="SearchWellHdrDtl_BTF_SearchWellHdrDtl_BTF_ExecutePageDef" Package="taskflow" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="WellMasterVO" RangeSize="25" DataControl="Oando_AMDataControl" id="WellMasterVOIterator"
+              Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="WellMasterVOIterator" id="Execute" RequiresUpdateModel="true" Action="iteratorExecute"/>
+  </bindings>
+</pageDefinition>

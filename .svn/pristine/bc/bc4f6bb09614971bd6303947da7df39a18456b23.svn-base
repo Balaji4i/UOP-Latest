@@ -1,0 +1,12 @@
+//Groovy Scripts for model.eo.UopMaster_EO
+
+package model.eo
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="UopDeprHdrId")
+def UopDeprHdrId_ExpressionScript_Expression()
+{
+new oracle.jbo.server.SequenceImpl("XXFA_UOP_DEPR_HDR_S",adf.object.getDBTransaction()).getSequenceNumber()
+}
+

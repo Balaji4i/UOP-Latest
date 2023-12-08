@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.9.14" id="FilmStripPageDef"
+                Package="pages"  ControllerClass="com.view.filmstrip.FilmStripPhaseListener">
+  <parameters/>
+  <executables>
+      <variableIterator id="variables"/>
+    <taskFlow id="dynamicRegion1"
+              taskFlowId="${backingBeanScope.FilmStripBean.dynamicTaskFlowId}"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding" Refresh="ifNeeded" activation="deferred"/>
+  </executables>
+  <bindings/>
+</pageDefinition>

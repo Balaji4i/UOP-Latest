@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="SearchWellHdrDtl_BTF">
+    <default-activity>SearchWell</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__9">
+      <managed-bean-name>SearchWell</managed-bean-name>
+      <managed-bean-class>view.SearchWell</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="SearchWell">
+      <page>/fragment/SearchWell.jsff</page>
+    </view>
+    <task-flow-call id="AddEditWellHdrDtl">
+      <task-flow-reference>
+        <document>/WEB-INF/taskflow/AddEditWellHdrDtl.xml</document>
+        <id>AddEditWellHdrDtl</id>
+      </task-flow-reference>
+      <input-parameter id="__14">
+        <name>mode</name>
+        <value>#{pageFlowScope.mode}</value>
+      </input-parameter>
+      <input-parameter id="__15">
+        <name>headerId</name>
+        <value>#{pageFlowScope.headerId}</value>
+      </input-parameter>
+    </task-flow-call>
+    <method-call id="Execute">
+      <method>#{bindings.Execute.execute}</method>
+      <outcome>
+        <fixed-outcome>Execute</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__10">
+      <from-activity-id>SearchWell</from-activity-id>
+      <control-flow-case id="__11">
+        <from-outcome>addEdit</from-outcome>
+        <to-activity-id>AddEditWellHdrDtl</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__16">
+      <from-activity-id>AddEditWellHdrDtl</from-activity-id>
+      <control-flow-case id="__17">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>Execute</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__1">
+      <from-activity-id>Execute</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>Execute</from-outcome>
+        <to-activity-id>SearchWell</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

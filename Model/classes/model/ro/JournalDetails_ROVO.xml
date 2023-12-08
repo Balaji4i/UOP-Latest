@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="JournalDetails_ROVO"
+  Version="12.2.1.9.14"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <SQLQuery><![CDATA[SELECT  
+    XXFA_UOP_DEPR_DIST_V.UOP_DEPR_HDR_ID UOP_DEPR_HDR_ID,  
+    XXFA_UOP_DEPR_DIST_V.ASSET_CATEGORY_ID ASSET_CATEGORY_ID,  
+    XXFA_UOP_DEPR_DIST_V.JE_HEADER_ID JE_HEADER_ID,  
+    XXFA_UOP_DEPR_DIST_V.JE_LINE_NUM JE_LINE_NUM,  
+    XXFA_UOP_DEPR_DIST_V.GL_COMPANY_CODE GL_COMPANY_CODE,  
+    XXFA_UOP_DEPR_DIST_V.GL_ACCOUNT_CODE GL_ACCOUNT_CODE,  
+    XXFA_UOP_DEPR_DIST_V.GL_REGION_CODE GL_REGION_CODE,  
+    XXFA_UOP_DEPR_DIST_V.PTD_VALUE PTD_VALUE,  
+    XXFA_UOP_DEPR_DIST_V.PTD_VALUE_FDC PTD_VALUE_FDC,  
+    XXFA_UOP_DEPR_DIST_V.PTD_VALUE_CAP PTD_VALUE_CAP,  
+    XXFA_UOP_DEPR_DIST_V.JE_NAME JE_NAME,  
+    XXFA_UOP_DEPR_DIST_V.DESCRIPTION DESCRIPTION,  
+    XXFA_UOP_DEPR_DIST_V.PERIOD_NAME PERIOD_NAME,  
+    XXFA_UOP_DEPR_DIST_V.JE_CATEGORY JE_CATEGORY,  
+    XXFA_UOP_DEPR_DIST_V.JE_SOURCE JE_SOURCE,  
+    XXFA_UOP_DEPR_DIST_V.CURRENCY_CODE CURRENCY_CODE,  
+    XXFA_UOP_DEPR_DIST_V.DATE_CREATED DATE_CREATED,  
+    XXFA_UOP_DEPR_DIST_V.DEFAULT_EFFECTIVE_DATE DEFAULT_EFFECTIVE_DATE,  
+    XXFA_UOP_DEPR_DIST_V.POSTED_DATE POSTED_DATE,  
+    XXFA_UOP_DEPR_DIST_V.STATUS STATUS,  
+    XXFA_UOP_DEPR_DIST_V.LEDGER_ID LEDGER_ID,  
+    XXFA_UOP_DEPR_DIST_V.LINE_DESCRIPTION LINE_DESCRIPTION,  
+    XXFA_UOP_DEPR_DIST_V.CODE_COMBINATION_ID CODE_COMBINATION_ID,  
+    XXFA_UOP_DEPR_DIST_V.ENTERED_DR ENTERED_DR,  
+    XXFA_UOP_DEPR_DIST_V.ENTERED_CR ENTERED_CR,  
+    XXFA_UOP_DEPR_DIST_V.ACCOUNTED_DR ACCOUNTED_DR,  
+    XXFA_UOP_DEPR_DIST_V.ACCOUNTED_CR ACCOUNTED_CR,  
+    XXFA_UOP_DEPR_DIST_V.CODE_COMBINATION CODE_COMBINATION,  
+    XXFA_UOP_DEPR_DIST_V.LEDGER_NAME LEDGER_NAME  
+FROM  
+    XXFA_UOP_DEPR_DIST_V]]></SQLQuery>
+  <ViewAttribute
+    Name="UopDeprHdrId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="UOP_DEPR_HDR_ID"
+    Expression="UOP_DEPR_HDR_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="AssetCategoryId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ASSET_CATEGORY_ID"
+    Expression="ASSET_CATEGORY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="JeHeaderId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="JE_HEADER_ID"
+    Expression="JE_HEADER_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="JeLineNum"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="JE_LINE_NUM"
+    Expression="JE_LINE_NUM"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="model.ro.JournalDetails_ROVO.JeLineNum_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="GlCompanyCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="GL_COMPANY_CODE"
+    Expression="GL_COMPANY_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="GlAccountCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="GL_ACCOUNT_CODE"
+    Expression="GL_ACCOUNT_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="model.ro.JournalDetails_ROVO.GlAccountCode_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="GlRegionCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="GL_REGION_CODE"
+    Expression="GL_REGION_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PtdValue"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PTD_VALUE"
+    Expression="PTD_VALUE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PtdValueFdc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PTD_VALUE_FDC"
+    Expression="PTD_VALUE_FDC"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PtdValueCap"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PTD_VALUE_CAP"
+    Expression="PTD_VALUE_CAP"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="JeName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="JE_NAME"
+    Expression="JE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="model.ro.JournalDetails_ROVO.JeName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Description"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DESCRIPTION"
+    Expression="DESCRIPTION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PeriodName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PERIOD_NAME"
+    Expression="PERIOD_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="JeCategory"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="25"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="JE_CATEGORY"
+    Expression="JE_CATEGORY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="25"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="JeSource"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="25"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="JE_SOURCE"
+    Expression="JE_SOURCE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="25"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="model.ro.JournalDetails_ROVO.JeSource_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CurrencyCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CURRENCY_CODE"
+    Expression="CURRENCY_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="model.ro.JournalDetails_ROVO.CurrencyCode_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DateCreated"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="DATE_CREATED"
+    Expression="DATE_CREATED"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="DefaultEffectiveDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="DEFAULT_EFFECTIVE_DATE"
+    Expression="DEFAULT_EFFECTIVE_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="PostedDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="POSTED_DATE"
+    Expression="POSTED_DATE"
+    SQLType="DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="model.ro.JournalDetails_ROVO.PostedDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Status"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="STATUS"
+    Expression="STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LedgerId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="LEDGER_ID"
+    Expression="LEDGER_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="LineDescription"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LINE_DESCRIPTION"
+    Expression="LINE_DESCRIPTION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CodeCombinationId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CODE_COMBINATION_ID"
+    Expression="CODE_COMBINATION_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="EnteredDr"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ENTERED_DR"
+    Expression="ENTERED_DR"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="model.ro.JournalDetails_ROVO.EnteredDr_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EnteredCr"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ENTERED_CR"
+    Expression="ENTERED_CR"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="model.ro.JournalDetails_ROVO.EnteredCr_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AccountedDr"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ACCOUNTED_DR"
+    Expression="ACCOUNTED_DR"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="model.ro.JournalDetails_ROVO.AccountedDr_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AccountedCr"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ACCOUNTED_CR"
+    Expression="ACCOUNTED_CR"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="model.ro.JournalDetails_ROVO.AccountedCr_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CodeCombination"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CODE_COMBINATION"
+    Expression="CODE_COMBINATION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LedgerName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="120"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LEDGER_NAME"
+    Expression="LEDGER_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="120"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

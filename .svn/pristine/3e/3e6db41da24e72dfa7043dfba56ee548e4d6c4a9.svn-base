@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.9.14" id="SearchCipMasterPageDef"
+                Package="fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="CipMaster_VO" RangeSize="5" DataControl="Oando_AMDataControl" id="CipMaster_VOIterator"/>
+    <searchRegion Criteria="CipMaster_VOCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="CipMaster_VOIterator" id="CipMasterVOCriteriaQuery"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="CipMaster_VOIterator" id="TransactionId">
+      <AttrNames>
+        <Item Value="TransactionId"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="CipMaster_VOIterator" id="CipMaster_VO">
+      <nodeDefinition DefName="model.vo.CipMaster_VO" Name="CipMaster_VO0">
+        <AttrNames>
+          <Item Value="TransactionNum"/>
+          <Item Value="Trans_WellName"/>
+          <Item Value="Trans_CompanyCode"/>
+          <Item Value="AssetBookCode"/>
+          <Item Value="PeriodName"/>
+          <Item Value="Status"/>
+          <Item Value="Trans_category"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

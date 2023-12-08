@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.9.14" id="SearchRetirementPageDef"
+                Package="fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Retirement_VO" RangeSize="5" DataControl="Oando_AMDataControl" id="Retirement_VOIterator"/>
+    <searchRegion Criteria="Retirement_VOCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="Retirement_VOIterator" id="RetirementVOCriteriaQuery"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="Retirement_VOIterator" id="TransactionId">
+      <AttrNames>
+        <Item Value="TransactionId"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="Retirement_VOIterator" id="Retirement_VO">
+      <nodeDefinition DefName="model.vo.Retirement_VO" Name="Retirement_VO0">
+        <AttrNames>
+          <Item Value="TransactionNum"/>
+          <Item Value="Trans_WellName"/>
+          <Item Value="Trans_CompanyCode"/>
+          <Item Value="AssetBookCode"/>
+          <Item Value="PeriodName"/>
+          <Item Value="Status"/>
+          <Item Value="Trans_Category"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

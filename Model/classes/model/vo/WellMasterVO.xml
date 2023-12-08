@@ -1,0 +1,723 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="WellMasterVO"
+  Version="12.2.1.9.14"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  RowClass="model.vo.WellMasterVORowImpl"
+  ComponentClass="model.vo.WellMasterVOImpl"
+  SelectListFlags="1"
+  FromListFlags="1"
+  WhereFlags="1"
+  SelectAllAttributes="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Variable
+    Name="BV_Id"
+    Kind="viewcriteria"
+    Type="java.math.BigDecimal"/>
+  <ViewAccessor
+    Name="Xxhr_BusinessUnit_view_ROVO"
+    ViewObjectName="model.ro.Xxhr_BusinessUnit_view_ROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="Xxgl_Ledgers"
+    ViewObjectName="model.ro.Xxgl_Ledgers"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="Xxhr_BusinessUnit_view_Ref"
+    ViewObjectName="model.ro.Xxhr_BusinessUnit_view_ROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="Code_Combination_ROVO"
+    ViewObjectName="model.ro.Code_Combination_ROVO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="Code_Combination_ROVOCriteria"
+      FullName="model.ro.Code_Combination_ROVO.Code_Combination_ROVOCriteria"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="Code_Combination_Ref"
+    ViewObjectName="model.ro.Code_Combination_ROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="EntityProfiles_ROVO"
+    ViewObjectName="model.ro.EntityProfiles_ROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="EntityProfiles_Ref"
+    ViewObjectName="model.ro.EntityProfiles_ROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="Well_ROVO"
+    ViewObjectName="model.ro.Well_ROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="Company_ROVO"
+    ViewObjectName="model.ro.Company_ROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="Company_AssetBook_ROVO"
+    ViewObjectName="model.ro.Company_AssetBook_ROVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="LegalEntity_ROVO"
+    ViewObjectName="model.ro.LegalEntity_ROVO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="getLegalEntityVC"
+      FullName="model.ro.LegalEntity_ROVO.getLegalEntityVC"/>
+    <ParameterMap>
+      <PIMap Variable="b_LedgerId">
+        <TransientExpression
+          Name="ExpressionScript"
+          trustMode="untrusted"
+          CodeSourceName="WellMasterVO"/>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="Lookup_View_ROVO"
+    ViewObjectName="model.ro.Lookup_View_ROVO"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="WellBlockNameVC"
+      FullName="model.ro.Lookup_View_ROVO.WellBlockNameVC"/>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_Trans_BusUnit"
+    ListVOName="Xxhr_BusinessUnit_view_ROVO"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Trans_BusUnit"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="BusinessUnitId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="BuName"/>
+      <Item Value="BuId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="BuName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="Xxhr_BusinessUnit_view_ROVOCriteria"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CurrencyCode"
+    ListVOName="Xxgl_Ledgers"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CurrencyCode"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CurrencyCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CurrencyCode"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Trans_Entity"
+    ListVOName="LegalEntity_ROVO"
+    NullValueFlag="none"
+    MRUCount="0"
+    ComboRowCountHint="10">
+    <AttrArray Name="AttrNames">
+      <Item Value="Trans_Entity"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="LegalEntityId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LegalEntityName"/>
+      <Item Value="LegalEntityId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LegalEntityId"/>
+      <Item Value="LegalEntityName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="LegalEntity_ROVOCriteria"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_WellCode"
+    ListVOName="Well_ROVO"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="WellCode"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="WellName"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="WellCode"/>
+      <Item Value="WellName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="WellCode"/>
+      <Item Value="WellName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="Well_Code_VC"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Trans_CompCode"
+    ListVOName="Company_AssetBook_ROVO"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Trans_CompCode"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="CompanyCode"/>
+      <Item Value="AssetBookCode"/>
+      <Item Value="Trans_AssetBookName"/>
+      <Item Value="Trans_Search_Cmpy"/>
+      <Item Value="LedgerId"/>
+      <Item Value="CurrencyCode"/>
+      <Item Value="Trans_LedgerName"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CompanyName"/>
+      <Item Value="CompanyCode"/>
+      <Item Value="BookTypeCode"/>
+      <Item Value="BookTypeName"/>
+      <Item Value="CompanyName"/>
+      <Item Value="LedgerId"/>
+      <Item Value="CurrencyCode"/>
+      <Item Value="LedgerName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CompanyCode"/>
+      <Item Value="CompanyName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="Company_VC"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Trans_Search_Cmpy"
+    ListVOName="Company_AssetBook_ROVO"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Trans_Search_Cmpy"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CompanyName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CompanyName"/>
+      <Item Value="CompanyCode"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="Company_VC"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Trans_WellBlockName"
+    ListVOName="Lookup_View_ROVO"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Trans_WellBlockName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="WellBlockCode"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LookupValueNameDisp"/>
+      <Item Value="LookupValueCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LookupValueCode"/>
+      <Item Value="LookupValueNameDisp"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="WellBlockNameSearchVC"/>
+  </ListBinding>
+  <EntityUsage
+    Name="WellMasterEO"
+    Entity="model.eo.WellMasterEO"/>
+  <ViewAttribute
+    Name="WellId"
+    PrecisionRule="true"
+    EntityAttrName="WellId"
+    EntityUsage="WellMasterEO"
+    AliasName="WELL_ID"/>
+  <ViewAttribute
+    Name="WellCode"
+    PrecisionRule="true"
+    EntityAttrName="WellCode"
+    EntityUsage="WellMasterEO"
+    AliasName="WELL_CODE"
+    LOVName="LOV_WellCode">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="model.vo.WellMasterVO.WellCode_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="WellName"
+    PrecisionRule="true"
+    EntityAttrName="WellName"
+    EntityUsage="WellMasterEO"
+    AliasName="WELL_NAME">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="model.vo.WellMasterVO.WellName_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Remarks"
+    PrecisionRule="true"
+    EntityAttrName="Remarks"
+    EntityUsage="WellMasterEO"
+    AliasName="REMARKS">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+        <DISPLAYHEIGHT
+          Value="50"/>
+        <LABEL
+          ResId="model.vo.WellMasterVO.Remarks_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BusinessUnitId"
+    PrecisionRule="true"
+    EntityAttrName="BusinessUnitId"
+    EntityUsage="WellMasterEO"
+    AliasName="BUSINESS_UNIT_ID">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="model.vo.WellMasterVO.BusinessUnitId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LegalEntityId"
+    PrecisionRule="true"
+    EntityAttrName="LegalEntityId"
+    EntityUsage="WellMasterEO"
+    AliasName="LEGAL_ENTITY_ID">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+        <DISPLAYHEIGHT
+          Value="50"/>
+        <LABEL
+          ResId="model.vo.WellMasterVO.LegalEntityId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LedgerId"
+    PrecisionRule="true"
+    EntityAttrName="LedgerId"
+    EntityUsage="WellMasterEO"
+    AliasName="LEDGER_ID">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+        <DISPLAYHEIGHT
+          Value="50"/>
+        <LABEL
+          ResId="model.vo.WellMasterVO.LedgerId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CurrencyCode"
+    PrecisionRule="true"
+    EntityAttrName="CurrencyCode"
+    EntityUsage="WellMasterEO"
+    AliasName="CURRENCY_CODE"
+    LOVName="LOV_CurrencyCode">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+        <LABEL
+          ResId="model.vo.WellMasterVO.CurrencyCode_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IsActive"
+    PrecisionRule="true"
+    EntityAttrName="IsActive"
+    EntityUsage="WellMasterEO"
+    AliasName="IS_ACTIVE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="model.vo.WellMasterVO.IsActive_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedBy"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="WellMasterEO"
+    AliasName="CREATED_BY"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="CreationDate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="WellMasterEO"
+    AliasName="CREATION_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="WellMasterEO"
+    AliasName="LAST_UPDATED_BY"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateDate"
+    EntityUsage="WellMasterEO"
+    AliasName="LAST_UPDATE_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="LastUpdateLogin"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateLogin"
+    EntityUsage="WellMasterEO"
+    AliasName="LAST_UPDATE_LOGIN"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="Trans_BusUnit"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_Trans_BusUnit">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="model.vo.WellMasterVO.Trans_BusUnit_LABEL"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Trans_Entity"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_Trans_Entity">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="model.vo.WellMasterVO.Trans_Entity_LABEL"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CompanyCode"
+    PrecisionRule="true"
+    EntityAttrName="CompanyCode"
+    EntityUsage="WellMasterEO"
+    AliasName="COMPANY_CODE"/>
+  <ViewAttribute
+    Name="Trans_CompCode"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_Trans_CompCode">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="model.vo.WellMasterVO.Trans_CompCode_LABEL"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AssetBookCode"
+    PrecisionRule="true"
+    EntityAttrName="AssetBookCode"
+    EntityUsage="WellMasterEO"
+    AliasName="ASSET_BOOK_CODE"/>
+  <ViewAttribute
+    Name="Trans_AssetBookName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="model.vo.WellMasterVO.Trans_AssetBookName_LABEL"/>
+        <DISPLAYWIDTH
+          Value="50"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Trans_Search_Cmpy"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_Trans_Search_Cmpy">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="model.vo.WellMasterVO.Trans_Search_Cmpy_LABEL"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Trans_LedgerName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="model.vo.WellMasterVO.Trans_LedgerName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="WellBlockCode"
+    PrecisionRule="true"
+    EntityAttrName="WellBlockCode"
+    EntityUsage="WellMasterEO"
+    AliasName="WELL_BLOCK_CODE"/>
+  <ViewAttribute
+    Name="Trans_WellBlockName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_Trans_WellBlockName">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="model.vo.WellMasterVO.Trans_WellBlockName_LABEL"/>
+        <CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="WellMasterVOCriteria"
+    ViewObjectName="model.vo.WellMasterVO"
+    Conjunction="AND"
+    Mode="3">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="false"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="WellMasterVOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="WellCode"
+        ViewAttribute="WellCode"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="WellName"
+        ViewAttribute="WellName"
+        Operator="STARTSWITH"
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Trans_Search_Cmpy"
+        ViewAttribute="Trans_Search_Cmpy"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="findById"
+    ViewObjectName="model.vo.WellMasterVO"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="false"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="WellMasterVOCriteria1_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="WellId"
+        ViewAttribute="WellId"
+        Operator="="
+        Conjunction="AND"
+        Value=":BV_Id"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="WellName_Cip_VC"
+    ViewObjectName="model.vo.WellMasterVO"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="false"/>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="WellMasterVOCriteria1_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="WellName"
+        ViewAttribute="WellName"
+        Operator="STARTSWITH"
+        Conjunction="AND"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewLinkAccessor
+    Name="WellDtlsVO"
+    ViewLink="model.vl.WellsMaster_VL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="WellChild_VO"
+    ViewLink="model.vl.WellMasChild_VL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

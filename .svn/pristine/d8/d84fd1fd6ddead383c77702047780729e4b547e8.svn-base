@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.9.14" id="AddEditCipPageDef"
+                Package="fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Cip_VO" RangeSize="25" DataControl="Oando_AMDataControl" id="Cip_VOIterator"/>
+  </executables>
+  <bindings>
+    <listOfValues IterBinding="Cip_VOIterator" StaticList="false" Uses="LOV_Trans_Well" id="Trans_Well"/>
+    <attributeValues IterBinding="Cip_VOIterator" id="CompanyCode">
+      <AttrNames>
+        <Item Value="CompanyCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="Cip_VOIterator" id="CurrencyCode">
+      <AttrNames>
+        <Item Value="CurrencyCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="Cip_VOIterator" id="GlDate">
+      <AttrNames>
+        <Item Value="GlDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="Cip_VOIterator" id="CumulativeCipCost">
+      <AttrNames>
+        <Item Value="CumulativeCipCost"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="Cip_VOIterator" id="CapitalizeAmount">
+      <AttrNames>
+        <Item Value="CapitalizeAmount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="Cip_VOIterator" id="Status">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="Cip_VOIterator" id="Remarks">
+      <AttrNames>
+        <Item Value="Remarks"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" DataControl="Oando_AMDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" DataControl="Oando_AMDataControl" RequiresUpdateModel="false" Action="rollbackTransaction"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.9.14"
+                id="SearchCipForm_BTF_SearchCipForm_BTF_ExecutePageDef" Package="taskflow" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="Cip_VO" RangeSize="25" DataControl="Oando_AMDataControl" id="Cip_VOIterator" Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="Cip_VOIterator" id="Execute" RequiresUpdateModel="true" Action="iteratorExecute"/>
+  </bindings>
+</pageDefinition>

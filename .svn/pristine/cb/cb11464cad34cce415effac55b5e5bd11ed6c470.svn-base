@@ -1,0 +1,12 @@
+//Groovy Scripts for model.vo.UopMaster_VO
+
+package model.vo
+
+import oracle.jbo.script.annotation.AccessorParameterExpression;
+
+@AccessorParameterExpression(accessorName="Period_Name_ROVO", name="p_well_id")
+def p_well_id_Period_Name_ROVO_BindVariable_BoundParameter()
+{
+WellId
+}
+

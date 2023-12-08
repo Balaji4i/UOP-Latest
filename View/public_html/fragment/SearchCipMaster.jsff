@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+    <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/MainPageTemplate.jspx" id="pt1">
+        <f:facet name="pageContents">
+            <af:panelGroupLayout layout="vertical" id="pgl1">
+                <af:panelHeader text="Capitalize CIP" id="ph1">
+                    <af:query id="qryId1" headerText="Search" disclosed="true"
+                              value="#{bindings.CipMasterVOCriteriaQuery.queryDescriptor}"
+                              model="#{bindings.CipMasterVOCriteriaQuery.queryModel}"
+                              queryListener="#{bindings.CipMasterVOCriteriaQuery.processQuery}"
+                              queryOperationListener="#{bindings.CipMasterVOCriteriaQuery.processQueryOperation}"/>
+                </af:panelHeader>
+                <af:panelBox id="pb1">
+                    <f:facet name="toolbar"/>
+                    <af:panelCollection id="pc1" styleClass=" AFStretchWidth">
+                        <f:facet name="menus"/>
+                        <f:facet name="toolbar">
+                            <af:toolbar id="t2" flex="1">
+                                <af:panelGroupLayout id="pgl2" layout="horizontal" halign="right">
+                                    <af:link id="cil3" icon="/images/func_add_16_ena.png"
+                                             hoverIcon="/images/func_add_16_hov.png" partialSubmit="true"
+                                             action="addEdit">
+                                        <af:setPropertyListener from="#{'add'}" to="#{pageFlowScope.mode}"
+                                                                type="action"/>
+                                        <af:setPropertyListener from="#{null}" to="#{pageFlowScope.headerId}"
+                                                                type="action"/>
+                                    </af:link>
+                                    <af:spacer width="10" height="10" id="s1"/>
+                                    <af:link hoverIcon="/images/func_pencil_16_hov.png" action="addEdit"
+                                             depressedIcon="/images/func_pencil_16_act.png"
+                                             icon="/images/func_pencil_16_ena.png" partialSubmit="true"
+                                             disabledIcon="/images/func_pencil_16_dis.png" id="l2"
+                                             actionListener="#{backingBeanScope.SearchCipMaster.onClickEdit}">
+                                        <af:setPropertyListener from="#{'edit'}" to="#{pageFlowScope.mode}"
+                                                                type="action"/>
+                                        <af:setPropertyListener from="#{bindings.TransactionId.inputValue}"
+                                                                to="#{pageFlowScope.headerId}" type="action"/>
+                                    </af:link>
+                                </af:panelGroupLayout>
+                            </af:toolbar>
+                        </f:facet>
+                        <f:facet name="statusbar"/>
+                        <af:table value="#{bindings.CipMaster_VO.collectionModel}" var="row"
+                                  rows="#{bindings.CipMaster_VO.rangeSize}"
+                                  emptyText="#{bindings.CipMaster_VO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  rowBandingInterval="0"
+                                  selectedRowKeys="#{bindings.CipMaster_VO.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.CipMaster_VO.collectionModel.makeCurrent}" scrollPolicy="page"
+                                  rowSelection="single" fetchSize="#{bindings.CipMaster_VO.rangeSize}" id="t1">
+                            <af:column headerText="#{bindings.CipMaster_VO.hints.TransactionNum.label}" id="c1"
+                                       width="200">
+                                <af:inputText value="#{row.bindings.TransactionNum.inputValue}"
+                                              label="#{bindings.CipMaster_VO.hints.TransactionNum.label}"
+                                              readOnly="true"
+                                              required="#{bindings.CipMaster_VO.hints.TransactionNum.mandatory}"
+                                              columns="#{bindings.CipMaster_VO.hints.TransactionNum.displayWidth}"
+                                              maximumLength="#{bindings.CipMaster_VO.hints.TransactionNum.precision}"
+                                              shortDesc="#{bindings.CipMaster_VO.hints.TransactionNum.tooltip}"
+                                              id="it1">
+                                    <f:validator binding="#{row.bindings.TransactionNum.validator}"/>
+                                </af:inputText>
+                            </af:column>
+                            <af:column headerText="#{bindings.CipMaster_VO.hints.Trans_WellName.label}" id="c2"
+                                       width="200">
+                                <af:inputComboboxListOfValues id="trans_WellNameId"
+                                                              popupTitle="Search and Select: #{bindings.CipMaster_VO.hints.Trans_WellName.label}"
+                                                              value="#{row.bindings.Trans_WellName.inputValue}"
+                                                              readOnly="true"
+                                                              model="#{row.bindings.Trans_WellName.listOfValuesModel}"
+                                                              required="#{bindings.CipMaster_VO.hints.Trans_WellName.mandatory}"
+                                                              columns="#{bindings.CipMaster_VO.hints.Trans_WellName.displayWidth}"
+                                                              shortDesc="#{bindings.CipMaster_VO.hints.Trans_WellName.tooltip}">
+                                    <f:validator binding="#{row.bindings.Trans_WellName.validator}"/>
+                                </af:inputComboboxListOfValues>
+                            </af:column>
+                            <af:column headerText="#{bindings.CipMaster_VO.hints.Trans_CompanyCode.label}" id="c3"
+                                       width="200">
+                                <af:inputText value="#{row.bindings.Trans_CompanyCode.inputValue}"
+                                              label="#{bindings.CipMaster_VO.hints.Trans_CompanyCode.label}"
+                                              readOnly="true"
+                                              required="#{bindings.CipMaster_VO.hints.Trans_CompanyCode.mandatory}"
+                                              columns="#{bindings.CipMaster_VO.hints.Trans_CompanyCode.displayWidth}"
+                                              maximumLength="#{bindings.CipMaster_VO.hints.Trans_CompanyCode.precision}"
+                                              shortDesc="#{bindings.CipMaster_VO.hints.Trans_CompanyCode.tooltip}"
+                                              id="it2">
+                                    <f:validator binding="#{row.bindings.Trans_CompanyCode.validator}"/>
+                                </af:inputText>
+                            </af:column>
+                            <af:column headerText="#{bindings.CipMaster_VO.hints.AssetBookCode.label}" id="c4"
+                                       width="200">
+                                <af:inputText value="#{row.bindings.AssetBookCode.inputValue}"
+                                              label="#{bindings.CipMaster_VO.hints.AssetBookCode.label}" readOnly="true"
+                                              required="#{bindings.CipMaster_VO.hints.AssetBookCode.mandatory}"
+                                              columns="#{bindings.CipMaster_VO.hints.AssetBookCode.displayWidth}"
+                                              maximumLength="#{bindings.CipMaster_VO.hints.AssetBookCode.precision}"
+                                              shortDesc="#{bindings.CipMaster_VO.hints.AssetBookCode.tooltip}" id="it3">
+                                    <f:validator binding="#{row.bindings.AssetBookCode.validator}"/>
+                                </af:inputText>
+                            </af:column>
+                            <af:column headerText="#{bindings.CipMaster_VO.hints.Trans_category.label}" rendered="false"  width="200" id="c9">
+                                <af:inputComboboxListOfValues id="trans_categoryId"
+                                                              popupTitle="Search and Select: #{bindings.CipMaster_VO.hints.Trans_category.label}"
+                                                              value="#{row.bindings.Trans_category.inputValue}"
+                                                              readOnly="true"
+                                                              model="#{row.bindings.Trans_category.listOfValuesModel}"
+                                                              required="#{bindings.CipMaster_VO.hints.Trans_category.mandatory}"
+                                                              columns="#{bindings.CipMaster_VO.hints.Trans_category.displayWidth}"
+                                                              shortDesc="#{bindings.CipMaster_VO.hints.Trans_category.tooltip}">
+                                    <f:validator binding="#{row.bindings.Trans_category.validator}"/>
+                                </af:inputComboboxListOfValues>
+                            </af:column>                           
+                            <af:column headerText="#{bindings.CipMaster_VO.hints.PeriodName.label}" id="c7">
+                                <af:inputComboboxListOfValues id="periodNameId"
+                                                              popupTitle="Search and Select: #{bindings.CipMaster_VO.hints.PeriodName.label}"
+                                                              value="#{row.bindings.PeriodName.inputValue}"
+                                                              readOnly="true"
+                                                              model="#{row.bindings.PeriodName.listOfValuesModel}"
+                                                              required="#{bindings.CipMaster_VO.hints.PeriodName.mandatory}"
+                                                              columns="#{bindings.CipMaster_VO.hints.PeriodName.displayWidth}"
+                                                              shortDesc="#{bindings.CipMaster_VO.hints.PeriodName.tooltip}">
+                                    <f:validator binding="#{row.bindings.PeriodName.validator}"/>
+                                </af:inputComboboxListOfValues>
+                            </af:column>
+                            <af:column width="200" headerText="#{bindings.CipMaster_VO.hints.Status.label}" id="c8">
+                                <af:inputText value="#{row.bindings.Status.inputValue}"
+                                              label="#{bindings.CipMaster_VO.hints.Status.label}"
+                                              required="#{bindings.CipMaster_VO.hints.Status.mandatory}" readOnly="true"
+                                              columns="#{bindings.CipMaster_VO.hints.Status.displayWidth}"
+                                              maximumLength="#{bindings.CipMaster_VO.hints.Status.precision}"
+                                              shortDesc="#{bindings.CipMaster_VO.hints.Status.tooltip}" id="it6">
+                                    <f:validator binding="#{row.bindings.Status.validator}"/>
+                                </af:inputText>
+                            </af:column>
+                        </af:table>
+                    </af:panelCollection>
+                </af:panelBox>
+            </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="footerStart"/>
+        <f:facet name="footer"/>
+        <f:facet name="footerEnd"/>
+        <f:facet name="startPanel"/>
+        <f:facet name="endPanel"/>
+        <f:facet name="headerStart"/>
+        <f:facet name="header"/>
+        <f:facet name="headerEnd"/>
+    </af:pageTemplate>
+</jsp:root>

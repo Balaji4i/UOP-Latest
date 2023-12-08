@@ -1,0 +1,12 @@
+//Groovy Scripts for model.vo.UopLines_VO
+
+package model.vo
+
+import oracle.jbo.script.annotation.AccessorParameterExpression;
+
+@AccessorParameterExpression(accessorName="Category_ROVO", name="bv_BookCode")
+def bv_BookCode_Category_ROVO_BindVariable_BoundParameter()
+{
+Trans_Bookcode
+}
+

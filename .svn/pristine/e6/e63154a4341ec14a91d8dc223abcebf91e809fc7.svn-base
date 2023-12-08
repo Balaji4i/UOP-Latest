@@ -1,0 +1,12 @@
+//Groovy Scripts for model.eo.WellChild_EO
+
+package model.eo
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="ChildWellId")
+def ChildWellId_ExpressionScript_Expression()
+{
+new oracle.jbo.server.SequenceImpl("XXFA_WELL_CHILD_S",adf.object.getDBTransaction()).getSequenceNumber()
+}
+

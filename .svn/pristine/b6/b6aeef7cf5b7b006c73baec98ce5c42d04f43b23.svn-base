@@ -1,0 +1,1146 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+    <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/MainPageTemplate.jspx" id="pt1">
+        <f:facet name="pageContents">
+            <af:panelBox id="pb1">
+                <f:facet name="toolbar"/>
+                <af:panelGridLayout id="pgl1">
+                    <af:gridRow marginTop="5px" height="auto" id="gr1">
+                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc1">
+                            <af:outputText value="UOP FORM" id="ot1" inlineStyle="font-size:large; font-weight:bold"/>
+                        </af:gridCell>
+                    </af:gridRow>
+                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+                        <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc2">
+                            <af:panelGroupLayout id="pgl2" layout="horizontal" halign="right">
+                               
+                               
+                                <af:button text="Transfer to GL" rendered="true"
+                                           actionListener="#{backingBeanScope.AddEditUop.onClickTransferToGl}"
+                                           disabled="#{(bindings.Status.inputValue eq 'APPROVED' and bindings.GlTransferFlag.inputValue ne 'true') ? false : true}"
+                                           id="b9"/>
+                                <af:spacer width="10" height="10" id="s1"/>
+                                <af:button text="Refresh" id="b6" disabled="#{bindings.Status.inputValue eq 'POSTED' 
+                                      || bindings.Status.inputValue eq 'APPROVED'
+                                      || bindings.Status.inputValue eq 'REJECTED'
+                                      || bindings.UopLines_VO.estimatedRowCount == 0 ? true : false}"
+                                           actionListener="#{backingBeanScope.AddEditUop.onClickRefresh}"/>
+                                <af:spacer width="10" height="10" id="s6"/>
+                                <af:button text="Export to Excel (All Rows)" id="b8">
+                                    <af:fileDownloadActionListener contentType="application/xls"
+                                                                   method="#{backingBeanScope.AddEditUop.onDownloadUopDetails}"
+                                                                   filename="UOP Details.xls"/>
+                                </af:button>
+                                <af:spacer width="10" height="10" id="s9"/>
+                                <af:button text="Save" id="b3" disabled="#{bindings.Status.inputValue eq 'POSTED' 
+                                      || bindings.Status.inputValue eq 'APPROVED'
+                                      || bindings.Status.inputValue eq 'REJECTED'
+                                      || bindings.UopLines_VO.estimatedRowCount == 0 ? true : false}"
+                                           actionListener="#{backingBeanScope.AddEditUop.onClickSave}"
+                                           partialSubmit="true" partialTriggers="b2"/>
+                                <af:spacer width="10" height="10" id="s2"/>
+                                <af:button text="Submit" disabled="#{bindings.Status.inputValue eq 'POSTED' 
+                                      || bindings.Status.inputValue eq 'APPROVED'
+                                      || bindings.Status.inputValue eq 'REJECTED'
+                                      || bindings.UopLines_VO.estimatedRowCount == 0? true : false}"
+                                           actionListener="#{backingBeanScope.AddEditUop.onClickSubmit}"
+                                           partialSubmit="true" id="b7" partialTriggers="b2"/>
+                                <af:spacer width="10" height="10" id="s7"/>
+                                <af:button text="Cancel" id="b1"
+                                           actionListener="#{backingBeanScope.AddEditUop.onClickCancel}"
+                                            action="back"></af:button>
+                            </af:panelGroupLayout>
+                        </af:gridCell>
+                    </af:gridRow>
+                </af:panelGridLayout>
+                <af:panelGroupLayout id="pgl3" layout="horizontal" styleClass="AFStretchWidth">
+                    <af:panelFormLayout id="pfl1" maxColumns="2" rows="3">
+                        <af:inputText value="#{bindings.UopDeprHdrId.inputValue}" label="Document No:" readOnly="true"
+                                      required="#{bindings.UopDeprHdrId.hints.mandatory}"
+                                      columns="#{bindings.UopDeprHdrId.hints.displayWidth}"
+                                      maximumLength="#{bindings.UopDeprHdrId.hints.precision}"
+                                      shortDesc="#{bindings.UopDeprHdrId.hints.tooltip}" id="it27">
+                            <f:validator binding="#{bindings.UopDeprHdrId.validator}"/>
+                            <af:convertNumber groupingUsed="false" pattern="#{bindings.UopDeprHdrId.format}"/>
+                        </af:inputText>
+                        <af:inputComboboxListOfValues id="trans_WellNameId"
+                                                      popupTitle="Search and Select: #{bindings.Trans_WellName.hints.label}"
+                                                      value="#{bindings.Trans_WellName.inputValue}"
+                                                      contentStyle="width:250px;" disabled="#{bindings.Status.inputValue eq 'POSTED' 
+                                      || bindings.Status.inputValue eq 'APPROVED'
+                                      || bindings.Status.inputValue eq 'REJECTED'? true : false}"
+                                                      label="#{bindings.Trans_WellName.hints.label}"
+                                                      model="#{bindings.Trans_WellName.listOfValuesModel}"
+                                                      required="true"
+                                                      columns="#{bindings.Trans_WellName.hints.displayWidth}"
+                                                      shortDesc="#{bindings.Trans_WellName.hints.tooltip}">
+                            <f:validator binding="#{bindings.Trans_WellName.validator}"/>
+                        </af:inputComboboxListOfValues>
+                        <af:inputComboboxListOfValues id="trans_CompCodeId"
+                                                      popupTitle="Search and Select: #{bindings.Trans_CompCode.hints.label}"
+                                                      value="#{bindings.Trans_CompCode.inputValue}"
+                                                      label="#{bindings.Trans_CompCode.hints.label}"
+                                                      contentStyle="width:250px;" disabled="true"
+                                                      partialTriggers="trans_WellNameId"
+                                                      model="#{bindings.Trans_CompCode.listOfValuesModel}"
+                                                      required="#{bindings.Trans_CompCode.hints.mandatory}"
+                                                      columns="#{bindings.Trans_CompCode.hints.displayWidth}"
+                                                      shortDesc="#{bindings.Trans_CompCode.hints.tooltip}">
+                            <f:validator binding="#{bindings.Trans_CompCode.validator}"/>
+                        </af:inputComboboxListOfValues>
+                        <af:inputText value="#{bindings.Trans_AssetBookName.inputValue}"
+                                      label="#{bindings.Trans_AssetBookName.hints.label}" disabled="true"
+                                      contentStyle="width:280px;" partialTriggers="trans_WellNameId"
+                                      required="#{bindings.Trans_AssetBookName.hints.mandatory}"
+                                      columns="#{bindings.Trans_AssetBookName.hints.displayWidth}"
+                                      maximumLength="#{bindings.Trans_AssetBookName.hints.precision}"
+                                      shortDesc="#{bindings.Trans_AssetBookName.hints.tooltip}" id="it26">
+                            <f:validator binding="#{bindings.Trans_AssetBookName.validator}"/>
+                        </af:inputText>
+                        <af:inputComboboxListOfValues id="trans_BusinessNameId" contentStyle="width:200px;"
+                                                      popupTitle="Search and Select: #{bindings.Trans_BusinessName.hints.label}"
+                                                      value="#{bindings.Trans_BusinessName.inputValue}" rendered="false"
+                                                      label="#{bindings.Trans_BusinessName.hints.label}"
+                                                      model="#{bindings.Trans_BusinessName.listOfValuesModel}"
+                                                      required="#{bindings.Trans_BusinessName.hints.mandatory}"
+                                                      columns="#{bindings.Trans_BusinessName.hints.displayWidth}"
+                                                      shortDesc="#{bindings.Trans_BusinessName.hints.tooltip}">
+                            <f:validator binding="#{bindings.Trans_BusinessName.validator}"/>
+                        </af:inputComboboxListOfValues>
+                        <af:panelLabelAndMessage label="Period" id="plam2">
+                            <af:panelGroupLayout id="pgl7" layout="horizontal" halign="left">
+                                <af:inputComboboxListOfValues id="periodId"
+                                                              popupTitle="Search and Select: #{bindings.Period.hints.label}"
+                                                              value="#{bindings.Period.inputValue}"
+                                                              contentStyle="width:200px;"
+                                                              label="#{bindings.Period.hints.label}" disabled="#{bindings.Status.inputValue eq 'POSTED' 
+                                      || bindings.Status.inputValue eq 'APPROVED'
+                                      || bindings.Status.inputValue eq 'REJECTED'? true : false}"
+                                                              model="#{bindings.Period.listOfValuesModel}"
+                                                              required="true"
+                                                              columns="#{bindings.Period.hints.displayWidth}"
+                                                              shortDesc="#{bindings.Period.hints.tooltip}" simple="true"
+                                                              valueChangeListener="#{backingBeanScope.AddEditUop.onClickPeriod}"
+                                                              autoSubmit="false">
+                                    <f:validator binding="#{bindings.Period.validator}"/>
+                                </af:inputComboboxListOfValues>
+                                <af:spacer width="10" height="10" id="s5"/>
+                                <af:outputText value="#{backingBeanScope.AddEditUop.errorMsg}" id="it30"
+                                               inlineStyle="color:red;" partialTriggers="periodId"/>
+                                <!--<af:button text="click" id="b7" actionListener="#{backingBeanScope.AddEditUop.onClickPeriod}"/>-->
+                            </af:panelGroupLayout>
+                        </af:panelLabelAndMessage>
+                        <af:inputText value="#{bindings.UnitsNetReserve.inputValue}"
+                                      label="#{bindings.UnitsNetReserve.hints.label}" disabled="true"
+                                      contentStyle="width:300px;" partialTriggers="trans_WellNameId" autoSubmit="true"
+                                      required="#{bindings.UnitsNetReserve.hints.mandatory}"
+                                      columns="#{bindings.UnitsNetReserve.hints.displayWidth}"
+                                      maximumLength="#{bindings.UnitsNetReserve.hints.precision}"
+                                      shortDesc="#{bindings.UnitsNetReserve.hints.tooltip}" id="it8">
+                            <f:validator binding="#{bindings.UnitsNetReserve.validator}"/>
+                            <af:convertNumber minFractionDigits="2" maxFractionDigits="2" pattern="###,###,###,###"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.ProdUnitsEquity.inputValue}"
+                                      label="#{bindings.ProdUnitsEquity.hints.label}" autoSubmit="true"
+                                      contentStyle="width:300px;" required="true" disabled="#{bindings.Status.inputValue eq 'POSTED' 
+                                      || bindings.Status.inputValue eq 'APPROVED'
+                                      || bindings.Status.inputValue eq 'REJECTED'? true : false}"
+                                      columns="#{bindings.ProdUnitsEquity.hints.displayWidth}"
+                                      maximumLength="#{bindings.ProdUnitsEquity.hints.precision}"
+                                      shortDesc="#{bindings.ProdUnitsEquity.hints.tooltip}" id="it12">
+                            <f:validator binding="#{bindings.ProdUnitsEquity.validator}"/>
+                            <af:convertNumber minFractionDigits="2" maxFractionDigits="2" pattern="###,###,###,###"/>
+                        </af:inputText>
+                        <af:panelLabelAndMessage label="#{bindings.Status.hints.label}" id="plam1">
+                            <af:outputText value="#{bindings.Status.inputValue}"
+                                           shortDesc="#{bindings.Status.hints.tooltip}" id="ot2"
+                                           partialTriggers="periodId"/>
+                        </af:panelLabelAndMessage>
+                        <af:inputText value="#{bindings.AssetCategoryId.inputValue}"
+                                      label="#{bindings.AssetCategoryId.hints.label}" rendered="false"
+                                      required="#{bindings.AssetCategoryId.hints.mandatory}"
+                                      columns="#{bindings.AssetCategoryId.hints.displayWidth}"
+                                      maximumLength="#{bindings.AssetCategoryId.hints.precision}"
+                                      shortDesc="#{bindings.AssetCategoryId.hints.tooltip}" id="it32">
+                            <f:validator binding="#{bindings.AssetCategoryId.validator}"/>
+                            <af:convertNumber groupingUsed="false" pattern="#{bindings.AssetCategoryId.format}"/>
+                        </af:inputText>
+                        <af:button text="Generate" id="b2"
+                                   actionListener="#{backingBeanScope.AddEditUop.uopData}" 
+                                disabled="#{bindings.Status.inputValue eq 'POSTED' 
+                                      || bindings.Status.inputValue eq 'APPROVED'
+                                      || bindings.Status.inputValue eq 'REJECTED'
+                                      || bindings.Status.inputValue eq 'DRAFT'
+                                      || bindings.UopLines_VO.estimatedRowCount > 0 ? true : false}"
+                                   partialTriggers="pc3:t1"/>
+                    </af:panelFormLayout>
+                </af:panelGroupLayout>
+                <af:spacer width="10" height="10" id="s3"/>
+                <af:panelBox text="" id="pb3" showDisclosure="false" inlineStyle="border-color:transparent;">
+                    <af:spacer width="10" height="10" id="s4"/>
+                    <af:panelTabbed position="above" id="pt2">
+                        <af:showDetailItem id="tab1" text="Capital Construction Cost" partialTriggers="b2">
+                            <af:panelBox text="Capital Cost" id="pb2" showDisclosure="false"
+                                         inlineStyle="border-color:transparent;">
+                                <af:panelCollection styleClass="AFStretchWidth" id="pc3" >
+                                    <f:facet name="menus"></f:facet>
+                                    <f:facet name="toolbar">
+                                        <af:toolbar id="t6">
+                                            <af:panelGroupLayout layout="horizontal" halign="right" id="pgl6">
+                                                <af:button text="Export to Excel (All Rows)" partialTriggers="::tab1"
+                                                           rendered="false" id="b5">
+                                                    <af:exportCollectionActionListener exportedId="t1" type="excelHTML"
+                                                                                       filename="CCData.xls"
+                                                                                       title="CC (All Rows)"/>
+                                                </af:button>
+                                            </af:panelGroupLayout>
+                                        </af:toolbar>
+                                    </f:facet>
+                                    <af:table value="#{bindings.UopLines_VO.collectionModel}" var="row"
+                                              rows="#{bindings.UopLines_VO.rangeSize}"
+                                              emptyText="#{bindings.UopLines_VO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              rowBandingInterval="0" 
+                                              selectedRowKeys="#{bindings.UopLines_VO.collectionModel.selectedRow}"
+                                              selectionListener="#{bindings.UopLines_VO.collectionModel.makeCurrent}"
+                                              rowSelection="single" fetchSize="10"
+                                              id="t1" binding="#{backingBeanScope.AddEditUop.ccTable}"
+                                              partialTriggers=":::b2"
+                                              filterModel="#{bindings.UopLines_VOQuery.queryDescriptor}"
+                                              filterVisible="true" scrollPolicy="page"
+                                              queryListener="#{bindings.UopLines_VOQuery.processQuery}" varStatus="vs">
+                                        <af:column headerText="Category" frozen="true" width="300" id="c8"
+                                                   sortProperty="#{bindings.UopLines_VO.hints.Trans_category.name}" 
+                                                   filterable="true">
+                                                   <f:facet name="filter">
+                                                <af:inputText id="it28" autoSubmit="true"  value="#{vs.filterCriteria.Trans_CatFilter}"
+                                                              binding="#{backingBeanScope.AddEditUop.catBinding}"/>
+                                            </f:facet>
+                                            <af:link  text="#{row.Trans_CatFilter}"
+                                                     actionListener="#{backingBeanScope.AddEditUop.getJournalDetails}" id="l1"/>
+                                            <af:outputText  rendered="false" value="#{row.Trans_category}"/>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UopLines_VO.hints.CcOpeningNbv.label}" id="c5"
+                                                   width="150"
+                                                   sortProperty="#{bindings.UopLines_VO.hints.CcOpeningNbv.name}"
+                                                   >
+                                            <af:inputText value="#{row.bindings.CcOpeningNbv.inputValue}"
+                                                          contentStyle="width:200px;"
+                                                          label="#{bindings.UopLines_VO.hints.CcOpeningNbv.label}"
+                                                          required="#{bindings.UopLines_VO.hints.CcOpeningNbv.mandatory}"
+                                                          columns="#{bindings.UopLines_VO.hints.CcOpeningNbv.displayWidth}"
+                                                          maximumLength="#{bindings.UopLines_VO.hints.CcOpeningNbv.precision}"
+                                                          shortDesc="#{bindings.UopLines_VO.hints.CcOpeningNbv.tooltip}"
+                                                          id="it5" autoSubmit="true" disabled="true">
+                                                <f:validator binding="#{row.bindings.CcOpeningNbv.validator}"/>
+                                                <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column headerText="Asset Cost-Opening" id="c1" width="150"
+                                                   sortProperty="#{bindings.UopLines_VO.hints.CcAccuCstOpening.name}"
+                                                  >
+                                            <af:inputText value="#{row.bindings.CcAccuCstOpening.inputValue}"
+                                                          contentStyle="width:200px;"
+                                                          label="#{bindings.UopLines_VO.hints.CcAccuCstOpening.label}"
+                                                          required="#{bindings.UopLines_VO.hints.CcAccuCstOpening.mandatory}"
+                                                          columns="#{bindings.UopLines_VO.hints.CcAccuCstOpening.displayWidth}"
+                                                          maximumLength="#{bindings.UopLines_VO.hints.CcAccuCstOpening.precision}"
+                                                          shortDesc="#{bindings.UopLines_VO.hints.CcAccuCstOpening.tooltip}"
+                                                          id="it1" autoSubmit="true" disabled="true">
+                                                <f:validator binding="#{row.bindings.CcAccuCstOpening.validator}"/>
+                                                <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UopLines_VO.hints.CcPeriodAdditions.label}"
+                                                   id="c6" width="150"
+                                                   sortProperty="#{bindings.UopLines_VO.hints.CcPeriodAdditions.name}"
+                                                   >
+                                            <af:inputText value="#{row.bindings.CcPeriodAdditions.inputValue}"
+                                                          contentStyle="width:200px;"
+                                                          label="#{bindings.UopLines_VO.hints.CcPeriodAdditions.label}"
+                                                          required="#{bindings.UopLines_VO.hints.CcPeriodAdditions.mandatory}"
+                                                          columns="#{bindings.UopLines_VO.hints.CcPeriodAdditions.displayWidth}"
+                                                          maximumLength="#{bindings.UopLines_VO.hints.CcPeriodAdditions.precision}"
+                                                          shortDesc="#{bindings.UopLines_VO.hints.CcPeriodAdditions.tooltip}"
+                                                          id="it6" autoSubmit="true" disabled="true">
+                                                <f:validator binding="#{row.bindings.CcPeriodAdditions.validator}"/>
+                                                <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UopLines_VO.hints.CcCip.label}" id="c3"
+                                                   width="150" sortProperty="#{bindings.UopLines_VO.hints.CcCip.name}"
+                                              >
+                                            <af:inputText value="#{row.bindings.CcCip.inputValue}"
+                                                          contentStyle="width:200px;"
+                                                          label="#{bindings.UopLines_VO.hints.CcCip.label}"
+                                                          required="#{bindings.UopLines_VO.hints.CcCip.mandatory}"
+                                                          columns="#{bindings.UopLines_VO.hints.CcCip.displayWidth}"
+                                                          maximumLength="#{bindings.UopLines_VO.hints.CcCip.precision}"
+                                                          shortDesc="#{bindings.UopLines_VO.hints.CcCip.tooltip}"
+                                                          id="it3" autoSubmit="true" disabled="true">
+                                                <f:validator binding="#{row.bindings.CcCip.validator}"/>
+                                                <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UopLines_VO.hints.CcTotalAddition.label}"
+                                                   id="c11" width="150"
+                                                   sortProperty="#{bindings.UopLines_VO.hints.CcTotalAddition.name}"
+                                                 >
+                                            <af:inputText value="#{row.bindings.CcTotalAddition.inputValue}"
+                                                          contentStyle="width:200px;"
+                                                          label="#{bindings.UopLines_VO.hints.CcTotalAddition.label}"
+                                                          required="#{bindings.UopLines_VO.hints.CcTotalAddition.mandatory}"
+                                                          columns="#{bindings.UopLines_VO.hints.CcTotalAddition.displayWidth}"
+                                                          maximumLength="#{bindings.UopLines_VO.hints.CcTotalAddition.precision}"
+                                                          shortDesc="#{bindings.UopLines_VO.hints.CcTotalAddition.tooltip}"
+                                                          id="it11" autoSubmit="true" disabled="true">
+                                                <f:validator binding="#{row.bindings.CcTotalAddition.validator}"/>
+                                                <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UopLines_VO.hints.CcTotAccuAssetCst.label}"
+                                                   id="c9" width="150"
+                                                   sortProperty="#{bindings.UopLines_VO.hints.CcTotAccuAssetCst.name}"
+                                                 >
+                                            <af:inputText value="#{row.bindings.CcTotAccuAssetCst.inputValue}"
+                                                          contentStyle="width:200px;"
+                                                          label="#{bindings.UopLines_VO.hints.CcTotAccuAssetCst.label}"
+                                                          required="#{bindings.UopLines_VO.hints.CcTotAccuAssetCst.mandatory}"
+                                                          columns="#{bindings.UopLines_VO.hints.CcTotAccuAssetCst.displayWidth}"
+                                                          maximumLength="#{bindings.UopLines_VO.hints.CcTotAccuAssetCst.precision}"
+                                                          shortDesc="#{bindings.UopLines_VO.hints.CcTotAccuAssetCst.tooltip}"
+                                                          id="it9" autoSubmit="true" disabled="true">
+                                                <f:validator binding="#{row.bindings.CcTotAccuAssetCst.validator}"/>
+                                                <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UopLines_VO.hints.CcAccuDeprOpening.label}"
+                                                   id="c2" width="150"
+                                                   sortProperty="#{bindings.UopLines_VO.hints.CcAccuDeprOpening.name}"
+                                               >
+                                            <af:inputText value="#{row.bindings.CcAccuDeprOpening.inputValue}"
+                                                          contentStyle="width:200px;"
+                                                          label="#{bindings.UopLines_VO.hints.CcAccuDeprOpening.label}"
+                                                          required="#{bindings.UopLines_VO.hints.CcAccuDeprOpening.mandatory}"
+                                                          columns="#{bindings.UopLines_VO.hints.CcAccuDeprOpening.displayWidth}"
+                                                          maximumLength="#{bindings.UopLines_VO.hints.CcAccuDeprOpening.precision}"
+                                                          shortDesc="#{bindings.UopLines_VO.hints.CcAccuDeprOpening.tooltip}"
+                                                          id="it2" autoSubmit="true" disabled="true">
+                                                <f:validator binding="#{row.bindings.CcAccuDeprOpening.validator}"/>
+                                                <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UopLines_VO.hints.CcPeriodDepr.label}" id="c7"
+                                                   width="150"
+                                                   sortProperty="#{bindings.UopLines_VO.hints.CcPeriodDepr.name}"
+                                                 >
+                                            <af:inputText value="#{row.bindings.CcPeriodDepr.inputValue}"
+                                                          contentStyle="width:200px;"
+                                                          label="#{bindings.UopLines_VO.hints.CcPeriodDepr.label}"
+                                                          required="#{bindings.UopLines_VO.hints.CcPeriodDepr.mandatory}"
+                                                          columns="#{bindings.UopLines_VO.hints.CcPeriodDepr.displayWidth}"
+                                                          maximumLength="#{bindings.UopLines_VO.hints.CcPeriodDepr.precision}"
+                                                          shortDesc="#{bindings.UopLines_VO.hints.CcPeriodDepr.tooltip}"
+                                                          id="it7" partialTriggers=":::it12" autoSubmit="true"
+                                                          disabled="true">
+                                                <f:validator binding="#{row.bindings.CcPeriodDepr.validator}"/>
+                                                <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UopLines_VO.hints.CcTotAccuDepr.label}"
+                                                   id="c10" width="150"
+                                                   sortProperty="#{bindings.UopLines_VO.hints.CcTotAccuDepr.name}"
+                                                  >
+                                            <af:inputText value="#{row.bindings.CcTotAccuDepr.inputValue}"
+                                                          contentStyle="width:200px;"
+                                                          label="#{bindings.UopLines_VO.hints.CcTotAccuDepr.label}"
+                                                          required="#{bindings.UopLines_VO.hints.CcTotAccuDepr.mandatory}"
+                                                          columns="#{bindings.UopLines_VO.hints.CcTotAccuDepr.displayWidth}"
+                                                          maximumLength="#{bindings.UopLines_VO.hints.CcTotAccuDepr.precision}"
+                                                          shortDesc="#{bindings.UopLines_VO.hints.CcTotAccuDepr.tooltip}"
+                                                          id="it10" partialTriggers=":::it12" autoSubmit="true"
+                                                          disabled="true">
+                                                <f:validator binding="#{row.bindings.CcTotAccuDepr.validator}"/>
+                                                <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UopLines_VO.hints.CcNbv.label}" id="c4"
+                                                   width="150" sortProperty="#{bindings.UopLines_VO.hints.CcNbv.name}"
+                                                 >
+                                            <af:inputText value="#{row.bindings.CcNbv.inputValue}"
+                                                          contentStyle="width:200px;" autoSubmit="true"
+                                                          label="#{bindings.UopLines_VO.hints.CcNbv.label}"
+                                                          required="#{bindings.UopLines_VO.hints.CcNbv.mandatory}"
+                                                          columns="#{bindings.UopLines_VO.hints.CcNbv.displayWidth}"
+                                                          maximumLength="#{bindings.UopLines_VO.hints.CcNbv.precision}"
+                                                          shortDesc="#{bindings.UopLines_VO.hints.CcNbv.tooltip}"
+                                                          id="it4" binding="#{backingBeanScope.AddEditUop.ccNvbBinding}"
+                                                          disabled="true">
+                                                <f:validator binding="#{row.bindings.CcNbv.validator}"/>
+                                                <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                            </af:inputText>
+                                        </af:column>
+                                    </af:table>
+                                </af:panelCollection>
+                            </af:panelBox>
+                            <af:popup childCreation="deferred" autoCancel="disabled" id="p2" 
+                         binding="#{backingBeanScope.AddEditUop.journalDetailsPopup}">
+                    <af:dialog id="d2" contentWidth="100" title="Journal Details"  type="none">
+                        <f:facet name="buttonBar">
+                            
+                            <af:panelGroupLayout  halign="right" layout="horizontal" id="pgl8">
+                            <af:toolbar id="t7">
+                                <af:button text="Close"  rendered="false"
+                                           actionListener="#{backingBeanScope.AddEditUop.onClickCancelPopup}" id="b10"/>
+                                
+                                           </af:toolbar>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                            <af:panelCollection  styleClass="AFStretchWidth" featuresOff="detach" id="pc4">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar"/>
+                                <f:facet name="statusbar"/>
+                                        <af:table value="#{bindings.JournalDetails_ROVO1.collectionModel}" var="row"
+                                                  rows="#{bindings.JournalDetails_ROVO1.rangeSize}"
+                                                  emptyText="#{bindings.JournalDetails_ROVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  rowBandingInterval="0" binding="#{backingBeanScope.AddEditUop.journalDetailTable}"
+                                                  fetchSize="#{bindings.JournalDetails_ROVO1.rangeSize}" id="t8">
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.UopDeprHdrId.label}"
+                                                  rendered="false"      id="c24">
+                                                <af:inputText value="#{row.bindings.UopDeprHdrId.inputValue}"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.UopDeprHdrId.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.UopDeprHdrId.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.UopDeprHdrId.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.UopDeprHdrId.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.UopDeprHdrId.tooltip}"
+                                                              id="it33">
+                                                    <f:validator binding="#{row.bindings.UopDeprHdrId.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.JournalDetails_ROVO1.hints.UopDeprHdrId.format}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.AssetCategoryId.label}"
+                                                rendered="false"        id="c28">
+                                                <af:inputText value="#{row.bindings.AssetCategoryId.inputValue}"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.AssetCategoryId.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.AssetCategoryId.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.AssetCategoryId.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.AssetCategoryId.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.AssetCategoryId.tooltip}"
+                                                              id="it34">
+                                                    <f:validator binding="#{row.bindings.AssetCategoryId.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.JournalDetails_ROVO1.hints.AssetCategoryId.format}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.JeSource.label}"
+                                                       id="c29">
+                                                <af:inputText value="#{row.bindings.JeSource.inputValue}" autoSubmit="true" disabled="true"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.JeSource.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.JeSource.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.JeSource.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.JeSource.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.JeSource.tooltip}"
+                                                              id="it35">
+                                                    <f:validator binding="#{row.bindings.JeSource.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.PostedDate.label}"
+                                                       id="c30">
+                                                <af:inputDate value="#{row.bindings.PostedDate.inputValue}" autoSubmit="true" disabled="true"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.PostedDate.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.PostedDate.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.PostedDate.displayWidth}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.PostedDate.tooltip}"
+                                                              id="id1">
+                                                    <f:validator binding="#{row.bindings.PostedDate.validator}"/>
+                                                    <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                                                </af:inputDate>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.JeName.label}"
+                                                       id="c31">
+                                                <af:inputText value="#{row.bindings.JeName.inputValue}" autoSubmit="true" disabled="true"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.JeName.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.JeName.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.JeName.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.JeName.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.JeName.tooltip}"
+                                                              id="it36">
+                                                    <f:validator binding="#{row.bindings.JeName.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.JeLineNum.label}"
+                                                       id="c32">
+                                                <af:inputText value="#{row.bindings.JeLineNum.inputValue}" autoSubmit="true" disabled="true"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.JeLineNum.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.JeLineNum.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.JeLineNum.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.JeLineNum.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.JeLineNum.tooltip}"
+                                                              id="it37">
+                                                    <f:validator binding="#{row.bindings.JeLineNum.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.JournalDetails_ROVO1.hints.JeLineNum.format}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.GlAccountCode.label}"
+                                                       id="c33">
+                                                <af:inputText value="#{row.bindings.GlAccountCode.inputValue}" autoSubmit="true" disabled="true"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.GlAccountCode.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.GlAccountCode.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.GlAccountCode.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.GlAccountCode.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.GlAccountCode.tooltip}"
+                                                              id="it38">
+                                                    <f:validator binding="#{row.bindings.GlAccountCode.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.CurrencyCode.label}"
+                                                       id="c34">
+                                                <af:inputText value="#{row.bindings.CurrencyCode.inputValue}" autoSubmit="true" disabled="true"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.CurrencyCode.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.CurrencyCode.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.CurrencyCode.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.CurrencyCode.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.CurrencyCode.tooltip}"
+                                                              id="it39">
+                                                    <f:validator binding="#{row.bindings.CurrencyCode.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.EnteredDr.label}"
+                                                       id="c35">
+                                                <af:inputText value="#{row.bindings.EnteredDr.inputValue}" autoSubmit="true" disabled="true"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.EnteredDr.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.EnteredDr.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.EnteredDr.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.EnteredDr.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.EnteredDr.tooltip}"
+                                                              id="it40">
+                                                    <f:validator binding="#{row.bindings.EnteredDr.validator}"/>
+                                                     <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.EnteredCr.label}"
+                                                       id="c36">
+                                                <af:inputText value="#{row.bindings.EnteredCr.inputValue}" autoSubmit="true" disabled="true"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.EnteredCr.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.EnteredCr.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.EnteredCr.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.EnteredCr.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.EnteredCr.tooltip}"
+                                                              id="it41">
+                                                    <f:validator binding="#{row.bindings.EnteredCr.validator}"/>
+                                                    <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.AccountedDr.label}"
+                                                       id="c37">
+                                                <af:inputText value="#{row.bindings.AccountedDr.inputValue}" autoSubmit="true" disabled="true"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.AccountedDr.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.AccountedDr.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.AccountedDr.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.AccountedDr.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.AccountedDr.tooltip}"
+                                                              id="it42">
+                                                    <f:validator binding="#{row.bindings.AccountedDr.validator}"/>
+                                                    <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.AccountedCr.label}"
+                                                       id="c38">
+                                                <af:inputText value="#{row.bindings.AccountedCr.inputValue}" autoSubmit="true" disabled="true"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.AccountedCr.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.AccountedCr.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.AccountedCr.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.AccountedCr.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.AccountedCr.tooltip}"
+                                                              id="it43">
+                                                    <f:validator binding="#{row.bindings.AccountedCr.validator}"/>
+                                                    <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.GlCompanyCode.label}"
+                                                  rendered="false"      id="c39">
+                                                <af:inputText value="#{row.bindings.GlCompanyCode.inputValue}"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.GlCompanyCode.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.GlCompanyCode.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.GlCompanyCode.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.GlCompanyCode.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.GlCompanyCode.tooltip}"
+                                                              id="it44">
+                                                    <f:validator binding="#{row.bindings.GlCompanyCode.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.JeHeaderId.label}"
+                                                      rendered="false"  id="c40">
+                                                <af:inputText value="#{row.bindings.JeHeaderId.inputValue}"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.JeHeaderId.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.JeHeaderId.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.JeHeaderId.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.JeHeaderId.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.JeHeaderId.tooltip}"
+                                                              id="it45">
+                                                    <f:validator binding="#{row.bindings.JeHeaderId.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.JournalDetails_ROVO1.hints.JeHeaderId.format}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.GlRegionCode.label}"
+                                                  rendered="false"      id="c41">
+                                                <af:inputText value="#{row.bindings.GlRegionCode.inputValue}"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.GlRegionCode.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.GlRegionCode.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.GlRegionCode.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.GlRegionCode.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.GlRegionCode.tooltip}"
+                                                              id="it46">
+                                                    <f:validator binding="#{row.bindings.GlRegionCode.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.PtdValue.label}"
+                                                     rendered="false"   id="c42">
+                                                <af:inputText value="#{row.bindings.PtdValue.inputValue}"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.PtdValue.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.PtdValue.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.PtdValue.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.PtdValue.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.PtdValue.tooltip}"
+                                                              id="it47">
+                                                    <f:validator binding="#{row.bindings.PtdValue.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.JournalDetails_ROVO1.hints.PtdValue.format}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.PtdValueFdc.label}"
+                                                      rendered="false"  id="c43">
+                                                <af:inputText value="#{row.bindings.PtdValueFdc.inputValue}"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.PtdValueFdc.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.PtdValueFdc.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.PtdValueFdc.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.PtdValueFdc.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.PtdValueFdc.tooltip}"
+                                                              id="it48">
+                                                    <f:validator binding="#{row.bindings.PtdValueFdc.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.JournalDetails_ROVO1.hints.PtdValueFdc.format}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.PtdValueCap.label}"
+                                                  rendered="false"      id="c44">
+                                                <af:inputText value="#{row.bindings.PtdValueCap.inputValue}"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.PtdValueCap.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.PtdValueCap.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.PtdValueCap.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.PtdValueCap.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.PtdValueCap.tooltip}"
+                                                              id="it49">
+                                                    <f:validator binding="#{row.bindings.PtdValueCap.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.JournalDetails_ROVO1.hints.PtdValueCap.format}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.Description.label}"
+                                               rendered="false"         id="c45">
+                                                <af:inputText value="#{row.bindings.Description.inputValue}"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.Description.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.Description.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.Description.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.Description.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.Description.tooltip}"
+                                                              id="it50">
+                                                    <f:validator binding="#{row.bindings.Description.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.PeriodName.label}"
+                                                    rendered="false"    id="c46">
+                                                <af:inputText value="#{row.bindings.PeriodName.inputValue}"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.PeriodName.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.PeriodName.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.PeriodName.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.PeriodName.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.PeriodName.tooltip}"
+                                                              id="it51">
+                                                    <f:validator binding="#{row.bindings.PeriodName.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.JeCategory.label}"
+                                                  rendered="false"      id="c47">
+                                                <af:inputText value="#{row.bindings.JeCategory.inputValue}"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.JeCategory.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.JeCategory.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.JeCategory.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.JeCategory.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.JeCategory.tooltip}"
+                                                              id="it52">
+                                                    <f:validator binding="#{row.bindings.JeCategory.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.DateCreated.label}"
+                                                     rendered="false"   id="c48">
+                                                <af:inputDate value="#{row.bindings.DateCreated.inputValue}"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.DateCreated.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.DateCreated.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.DateCreated.displayWidth}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.DateCreated.tooltip}"
+                                                              id="id2">
+                                                    <f:validator binding="#{row.bindings.DateCreated.validator}"/>
+                                                    <af:convertDateTime pattern="#{bindings.JournalDetails_ROVO1.hints.DateCreated.format}"/>
+                                                </af:inputDate>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.DefaultEffectiveDate.label}"
+                                                 rendered="false"       id="c49">
+                                                <af:inputDate value="#{row.bindings.DefaultEffectiveDate.inputValue}"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.DefaultEffectiveDate.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.DefaultEffectiveDate.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.DefaultEffectiveDate.displayWidth}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.DefaultEffectiveDate.tooltip}"
+                                                              id="id3">
+                                                    <f:validator binding="#{row.bindings.DefaultEffectiveDate.validator}"/>
+                                                    <af:convertDateTime pattern="#{bindings.JournalDetails_ROVO1.hints.DefaultEffectiveDate.format}"/>
+                                                </af:inputDate>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.Status.label}"
+                                                   rendered="false"     id="c50">
+                                                <af:inputText value="#{row.bindings.Status.inputValue}"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.Status.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.Status.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.Status.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.Status.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.Status.tooltip}"
+                                                              id="it53">
+                                                    <f:validator binding="#{row.bindings.Status.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.LedgerId.label}"
+                                                   rendered="false"     id="c51">
+                                                <af:inputText value="#{row.bindings.LedgerId.inputValue}"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.LedgerId.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.LedgerId.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.LedgerId.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.LedgerId.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.LedgerId.tooltip}"
+                                                              id="it54">
+                                                    <f:validator binding="#{row.bindings.LedgerId.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.JournalDetails_ROVO1.hints.LedgerId.format}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.LineDescription.label}"
+                                                  rendered="false"      id="c52">
+                                                <af:inputText value="#{row.bindings.LineDescription.inputValue}"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.LineDescription.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.LineDescription.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.LineDescription.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.LineDescription.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.LineDescription.tooltip}"
+                                                              id="it55">
+                                                    <f:validator binding="#{row.bindings.LineDescription.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.CodeCombinationId.label}"
+                                                 rendered="false"       id="c53">
+                                                <af:inputText value="#{row.bindings.CodeCombinationId.inputValue}"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.CodeCombinationId.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.CodeCombinationId.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.CodeCombinationId.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.CodeCombinationId.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.CodeCombinationId.tooltip}"
+                                                              id="it56">
+                                                    <f:validator binding="#{row.bindings.CodeCombinationId.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.JournalDetails_ROVO1.hints.CodeCombinationId.format}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.CodeCombination.label}"
+                                                 rendered="false"       id="c54">
+                                                <af:inputText value="#{row.bindings.CodeCombination.inputValue}"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.CodeCombination.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.CodeCombination.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.CodeCombination.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.CodeCombination.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.CodeCombination.tooltip}"
+                                                              id="it57">
+                                                    <f:validator binding="#{row.bindings.CodeCombination.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.JournalDetails_ROVO1.hints.LedgerName.label}"
+                                                  rendered="false"      id="c55">
+                                                <af:inputText value="#{row.bindings.LedgerName.inputValue}"
+                                                              label="#{bindings.JournalDetails_ROVO1.hints.LedgerName.label}"
+                                                              required="#{bindings.JournalDetails_ROVO1.hints.LedgerName.mandatory}"
+                                                              columns="#{bindings.JournalDetails_ROVO1.hints.LedgerName.displayWidth}"
+                                                              maximumLength="#{bindings.JournalDetails_ROVO1.hints.LedgerName.precision}"
+                                                              shortDesc="#{bindings.JournalDetails_ROVO1.hints.LedgerName.tooltip}"
+                                                              id="it58">
+                                                    <f:validator binding="#{row.bindings.LedgerName.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelCollection>
+                        
+                        
+                    </af:dialog>
+                </af:popup>
+                        </af:showDetailItem>
+                        <af:showDetailItem id="sdi2" text="Future Development Cost" partialTriggers="b2">
+                            <af:panelBox text="Future Development Cost" id="pb4" inlineStyle="border-color:transparent;"
+                                         showDisclosure="false">
+                                <af:panelCollection styleClass="AFStretchWidth" id="pc2">
+                                    <f:facet name="menus"></f:facet>
+                                    <f:facet name="toolbar">
+                                        <af:toolbar id="t5">
+                                            <af:panelGroupLayout layout="horizontal" halign="right" rendered="false"
+                                                                 id="pgl5">
+                                                <af:button text="Export to Excel (All Rows)" partialTriggers="::sdi2"
+                                                           id="b4">
+                                                    <af:exportCollectionActionListener exportedId="t2" type="excelHTML"
+                                                                                       filename="FDCData.xls"
+                                                                                       title="FDC (All Rows)"/>
+                                                </af:button>
+                                            </af:panelGroupLayout>
+                                        </af:toolbar>
+                                    </f:facet>
+                                    <af:table value="#{bindings.UopLines_VO1.collectionModel}" var="row"
+                                              rows="#{bindings.UopLines_VO1.rangeSize}"
+                                              emptyText="#{bindings.UopLines_VO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              rowBandingInterval="0" scrollPolicy="page"
+                                              selectedRowKeys="#{bindings.UopLines_VO1.collectionModel.selectedRow}"
+                                              selectionListener="#{bindings.UopLines_VO1.collectionModel.makeCurrent}"
+                                              rowSelection="single" fetchSize="#{bindings.UopLines_VO1.rangeSize}"
+                                              id="t2" binding="#{backingBeanScope.AddEditUop.fdcTable}"
+                                              filterModel="#{bindings.UopLines_VOQuery.queryDescriptor}"
+                                              filterVisible="true"
+                                              queryListener="#{bindings.UopLines_VOQuery.processQuery}" varStatus="vs">
+                                        <af:column headerText="Category" frozen="true" width="350" id="c12"
+                                                   sortProperty="#{bindings.UopLines_VO1.hints.Trans_category.name}" filterable="true"
+                                                  >
+                                                  
+                                                    <f:facet name="filter">
+                                                <af:inputText id="it29" autoSubmit="true" value="#{vs.filterCriteria.Trans_CatFilter}"/>
+                                            </f:facet> 
+                                            <af:outputText value="#{row.Trans_CatFilter}"
+                                                           id="ot5"/>
+                                            <af:inputComboboxListOfValues id="iclov1" autoSubmit="true" 
+                                                                          popupTitle="Search and Select: #{bindings.UopLines_VO1.hints.Trans_category.label}"
+                                                                          value="#{row.bindings.Trans_category.inputValue}"
+                                                                          model="#{row.bindings.Trans_category.listOfValuesModel}"
+                                                                     rendered="false"     required="#{bindings.UopLines_VO1.hints.Trans_category.mandatory}"
+                                                                          columns="#{bindings.UopLines_VO1.hints.Trans_category.displayWidth}"
+                                                                          shortDesc="#{bindings.UopLines_VO1.hints.Trans_category.tooltip}"
+                                                                          readOnly="true">
+                                                <f:validator binding="#{row.bindings.Trans_category.validator}"/>
+                                            </af:inputComboboxListOfValues>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UopLines_VO1.hints.FdcOpeningNbv.label}"
+                                                   id="c18" width="150"
+                                                   sortProperty="#{bindings.UopLines_VO1.hints.FdcOpeningNbv.name}"
+                                                   >
+                                            <af:inputText value="#{row.bindings.FdcOpeningNbv.inputValue}"
+                                                          contentStyle="width:200px;"
+                                                          label="#{bindings.UopLines_VO1.hints.FdcOpeningNbv.label}"
+                                                          required="#{bindings.UopLines_VO1.hints.FdcOpeningNbv.mandatory}"
+                                                          columns="#{bindings.UopLines_VO1.hints.FdcOpeningNbv.displayWidth}"
+                                                          maximumLength="#{bindings.UopLines_VO1.hints.FdcOpeningNbv.precision}"
+                                                          shortDesc="#{bindings.UopLines_VO1.hints.FdcOpeningNbv.tooltip}"
+                                                          id="it18" autoSubmit="true" disabled="true">
+                                                <f:validator binding="#{row.bindings.FdcOpeningNbv.validator}"/>
+                                                <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UopLines_VO1.hints.FdcAccuCstOpening.label}"
+                                                   id="c13" width="150"
+                                                   sortProperty="#{bindings.UopLines_VO1.hints.FdcAccuCstOpening.name}"
+                                                 >
+                                            <af:inputText value="#{row.bindings.FdcAccuCstOpening.inputValue}"
+                                                          contentStyle="width:200px;"
+                                                          label="#{bindings.UopLines_VO1.hints.FdcAccuCstOpening.label}"
+                                                          required="#{bindings.UopLines_VO1.hints.FdcAccuCstOpening.mandatory}"
+                                                          columns="#{bindings.UopLines_VO1.hints.FdcAccuCstOpening.displayWidth}"
+                                                          maximumLength="#{bindings.UopLines_VO1.hints.FdcAccuCstOpening.precision}"
+                                                          shortDesc="#{bindings.UopLines_VO1.hints.FdcAccuCstOpening.tooltip}"
+                                                          id="it13" autoSubmit="true" disabled="true">
+                                                <f:validator binding="#{row.bindings.FdcAccuCstOpening.validator}"/>
+                                                <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UopLines_VO1.hints.FdcPeriodAdditions.label}"
+                                                   id="c19" width="150"
+                                                   sortProperty="#{bindings.UopLines_VO1.hints.FdcPeriodAdditions.name}"
+                                                >
+                                            <af:inputText value="#{row.bindings.FdcPeriodAdditions.inputValue}"
+                                                          contentStyle="width:200px;" disabled="#{bindings.Status.inputValue eq 'SUBMITTED FOR APPROVAL' 
+                                      || bindings.Status.inputValue eq 'APPROVED'  
+                                      || bindings.Status.inputValue eq 'REJECTED'? true : false}"
+                                                          label="#{bindings.UopLines_VO1.hints.FdcPeriodAdditions.label}"
+                                                          required="#{bindings.UopLines_VO1.hints.FdcPeriodAdditions.mandatory}"
+                                                          columns="#{bindings.UopLines_VO1.hints.FdcPeriodAdditions.displayWidth}"
+                                                          maximumLength="#{bindings.UopLines_VO1.hints.FdcPeriodAdditions.precision}"
+                                                          shortDesc="#{bindings.UopLines_VO1.hints.FdcPeriodAdditions.tooltip}"
+                                                          id="it19" autoSubmit="true">
+                                                <f:validator binding="#{row.bindings.FdcPeriodAdditions.validator}"/>
+                                                <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UopLines_VO1.hints.FdcCip.label}" id="c16"
+                                                   width="150" sortProperty="#{bindings.UopLines_VO1.hints.FdcCip.name}"
+                                                 >
+                                            <af:inputText value="#{row.bindings.FdcCip.inputValue}"
+                                                          contentStyle="width:200px;"
+                                                          label="#{bindings.UopLines_VO1.hints.FdcCip.label}"
+                                                          required="#{bindings.UopLines_VO1.hints.FdcCip.mandatory}"
+                                                          columns="#{bindings.UopLines_VO1.hints.FdcCip.displayWidth}"
+                                                          maximumLength="#{bindings.UopLines_VO1.hints.FdcCip.precision}"
+                                                          shortDesc="#{bindings.UopLines_VO1.hints.FdcCip.tooltip}"
+                                                          id="it16" autoSubmit="true" disabled="true">
+                                                <f:validator binding="#{row.bindings.FdcCip.validator}"/>
+                                                <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UopLines_VO1.hints.FdcAdditionCip.label}"
+                                                   id="c15" width="150"
+                                                   sortProperty="#{bindings.UopLines_VO1.hints.FdcAdditionCip.name}"
+                                                >
+                                            <af:inputText value="#{row.bindings.FdcAdditionCip.inputValue}"
+                                                          contentStyle="width:200px;"
+                                                          label="#{bindings.UopLines_VO1.hints.FdcAdditionCip.label}"
+                                                          required="#{bindings.UopLines_VO1.hints.FdcAdditionCip.mandatory}"
+                                                          columns="#{bindings.UopLines_VO1.hints.FdcAdditionCip.displayWidth}"
+                                                          maximumLength="#{bindings.UopLines_VO1.hints.FdcAdditionCip.precision}"
+                                                          shortDesc="#{bindings.UopLines_VO1.hints.FdcAdditionCip.tooltip}"
+                                                          id="it15" partialTriggers="it19" autoSubmit="true"
+                                                          disabled="true">
+                                                <f:validator binding="#{row.bindings.FdcAdditionCip.validator}"/>
+                                                <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UopLines_VO1.hints.FdcTotAccuAssetCst.label}"
+                                                   id="c21" width="150"
+                                                   sortProperty="#{bindings.UopLines_VO1.hints.FdcTotAccuAssetCst.name}"
+                                               >
+                                            <af:inputText value="#{row.bindings.FdcTotAccuAssetCst.inputValue}"
+                                                          contentStyle="width:200px;"
+                                                          label="#{bindings.UopLines_VO1.hints.FdcTotAccuAssetCst.label}"
+                                                          required="#{bindings.UopLines_VO1.hints.FdcTotAccuAssetCst.mandatory}"
+                                                          columns="#{bindings.UopLines_VO1.hints.FdcTotAccuAssetCst.displayWidth}"
+                                                          maximumLength="#{bindings.UopLines_VO1.hints.FdcTotAccuAssetCst.precision}"
+                                                          shortDesc="#{bindings.UopLines_VO1.hints.FdcTotAccuAssetCst.tooltip}"
+                                                          id="it21" partialTriggers="it19" autoSubmit="true"
+                                                          disabled="true">
+                                                <f:validator binding="#{row.bindings.FdcTotAccuAssetCst.validator}"/>
+                                                <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UopLines_VO1.hints.FdcAccuDeprOpening.label}"
+                                                   id="c14" width="150"
+                                                   sortProperty="#{bindings.UopLines_VO1.hints.FdcAccuDeprOpening.name}"
+                                                >
+                                            <af:inputText value="#{row.bindings.FdcAccuDeprOpening.inputValue}"
+                                                          contentStyle="width:200px;"
+                                                          label="#{bindings.UopLines_VO1.hints.FdcAccuDeprOpening.label}"
+                                                          required="#{bindings.UopLines_VO1.hints.FdcAccuDeprOpening.mandatory}"
+                                                          columns="#{bindings.UopLines_VO1.hints.FdcAccuDeprOpening.displayWidth}"
+                                                          maximumLength="#{bindings.UopLines_VO1.hints.FdcAccuDeprOpening.precision}"
+                                                          shortDesc="#{bindings.UopLines_VO1.hints.FdcAccuDeprOpening.tooltip}"
+                                                          id="it14" partialTriggers="it19" autoSubmit="true"
+                                                          disabled="true">
+                                                <f:validator binding="#{row.bindings.FdcAccuDeprOpening.validator}"/>
+                                                <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UopLines_VO1.hints.FdcPeriodDepr.label}"
+                                                   id="c20" width="150"
+                                                   sortProperty="#{bindings.UopLines_VO1.hints.FdcPeriodDepr.name}"
+                                                 >
+                                            <af:inputText value="#{row.bindings.FdcPeriodDepr.inputValue}"
+                                                          contentStyle="width:200px;"
+                                                          label="#{bindings.UopLines_VO1.hints.FdcPeriodDepr.label}"
+                                                          required="#{bindings.UopLines_VO1.hints.FdcPeriodDepr.mandatory}"
+                                                          columns="#{bindings.UopLines_VO1.hints.FdcPeriodDepr.displayWidth}"
+                                                          maximumLength="#{bindings.UopLines_VO1.hints.FdcPeriodDepr.precision}"
+                                                          shortDesc="#{bindings.UopLines_VO1.hints.FdcPeriodDepr.tooltip}"
+                                                          id="it20" partialTriggers="it19" autoSubmit="true"
+                                                          disabled="true">
+                                                <f:validator binding="#{row.bindings.FdcPeriodDepr.validator}"/>
+                                                <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UopLines_VO1.hints.FdcTotAccuDepr.label}"
+                                                   id="c22" width="150"
+                                                   sortProperty="#{bindings.UopLines_VO1.hints.FdcTotAccuDepr.name}"
+                                                 >
+                                            <af:inputText value="#{row.bindings.FdcTotAccuDepr.inputValue}"
+                                                          contentStyle="width:200px;"
+                                                          label="#{bindings.UopLines_VO1.hints.FdcTotAccuDepr.label}"
+                                                          required="#{bindings.UopLines_VO1.hints.FdcTotAccuDepr.mandatory}"
+                                                          columns="#{bindings.UopLines_VO1.hints.FdcTotAccuDepr.displayWidth}"
+                                                          maximumLength="#{bindings.UopLines_VO1.hints.FdcTotAccuDepr.precision}"
+                                                          shortDesc="#{bindings.UopLines_VO1.hints.FdcTotAccuDepr.tooltip}"
+                                                          id="it22" partialTriggers="it19" autoSubmit="true"
+                                                          disabled="true">
+                                                <f:validator binding="#{row.bindings.FdcTotAccuDepr.validator}"/>
+                                                <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UopLines_VO1.hints.FdcNbv.label}" id="c17"
+                                                   width="150" sortProperty="#{bindings.UopLines_VO1.hints.FdcNbv.name}"
+                                               >
+                                            <af:inputText value="#{row.bindings.FdcNbv.inputValue}" autoSubmit="true"
+                                                          label="#{bindings.UopLines_VO1.hints.FdcNbv.label}"
+                                                          required="#{bindings.UopLines_VO1.hints.FdcNbv.mandatory}"
+                                                          columns="#{bindings.UopLines_VO1.hints.FdcNbv.displayWidth}"
+                                                          maximumLength="#{bindings.UopLines_VO1.hints.FdcNbv.precision}"
+                                                          shortDesc="#{bindings.UopLines_VO1.hints.FdcNbv.tooltip}"
+                                                          id="it17" disabled="true">
+                                                <f:validator binding="#{row.bindings.FdcNbv.validator}"/>
+                                                <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                            </af:inputText>
+                                        </af:column>
+                                    </af:table>
+                                </af:panelCollection>
+                            </af:panelBox>
+                        </af:showDetailItem>
+                        <af:showDetailItem id="sdi1" text="CIP" partialTriggers="b2">
+                            <af:panelBox text="CIP" id="pb5" inlineStyle="border-color:transparent;"
+                                         showDisclosure="false">
+                                <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                                    <f:facet name="menus"></f:facet>
+                                    <f:facet name="toolbar">
+                                        <af:toolbar id="t4">
+                                            <af:panelGroupLayout id="pgl4" layout="horizontal" halign="right"
+                                                                 rendered="false">
+                                                <af:button text="Export to Excel (All Rows)" partialTriggers="::sdi1"
+                                                           id="cb1">
+                                                    <af:exportCollectionActionListener exportedId="t3" type="excelHTML"
+                                                                                       filename="CIPData.xls"
+                                                                                       title="CIP (All Rows)"/>
+                                                </af:button>
+                                                <af:spacer width="10" height="10" id="s8"/>
+                                            </af:panelGroupLayout>
+                                        </af:toolbar>
+                                    </f:facet>
+                                    <f:facet name="statusbar"/>
+                                    <af:table value="#{bindings.UopLines_VO2.collectionModel}" var="row"
+                                              rows="#{bindings.UopLines_VO2.rangeSize}"
+                                              emptyText="#{bindings.UopLines_VO2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              rowBandingInterval="0"
+                                              selectedRowKeys="#{bindings.UopLines_VO2.collectionModel.selectedRow}"
+                                              selectionListener="#{bindings.UopLines_VO2.collectionModel.makeCurrent}"
+                                              rowSelection="single" fetchSize="#{bindings.UopLines_VO2.rangeSize}"
+                                              id="t3" filterModel="#{bindings.UopLines_VOQuery.queryDescriptor}"
+                                              filterVisible="true" scrollPolicy="page" 
+                                              queryListener="#{bindings.UopLines_VOQuery.processQuery}" varStatus="vs"
+                                              binding="#{backingBeanScope.AddEditUop.cipTable}">
+                                        <af:column headerText="Category" width="400" frozen="true" id="c23"
+                                                   sortProperty="#{bindings.UopLines_VO2.hints.Trans_category.name}"
+                                                   filterable="true">
+                                                    <f:facet name="filter">
+                                                <af:inputText id="it31" autoSubmit="true" value="#{vs.filterCriteria.Trans_CatFilter}"/>
+                                            </f:facet>
+                                                <af:outputText value="#{row.Trans_CatFilter}"
+                                                              
+                                                               id="ot4"/>
+                                            
+                                            <af:inputComboboxListOfValues id="iclov2" autoSubmit="true" rendered="false"
+                                                                          popupTitle="Search and Select: #{bindings.UopLines_VO2.hints.Trans_category.label}"
+                                                                          value="#{row.bindings.Trans_category.inputValue}"
+                                                                          model="#{row.bindings.Trans_category.listOfValuesModel}"
+                                                                          required="#{bindings.UopLines_VO2.hints.Trans_category.mandatory}"
+                                                                          columns="#{bindings.UopLines_VO2.hints.Trans_category.displayWidth}"
+                                                                          shortDesc="#{bindings.UopLines_VO2.hints.Trans_category.tooltip}"
+                                                                          readOnly="true">
+                                                <f:validator binding="#{row.bindings.Trans_category.validator}"/>
+                                            </af:inputComboboxListOfValues>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UopLines_VO2.hints.CipCost.label}" id="c25"
+                                                   width="200"
+                                                   sortProperty="#{bindings.UopLines_VO2.hints.CipCost.name}"
+                                                   >
+                                            <af:inputText value="#{row.bindings.CipCost.inputValue}"
+                                                          label="#{bindings.UopLines_VO2.hints.CipCost.label}"
+                                                          disabled="true" autoSubmit="true"
+                                                          required="#{bindings.UopLines_VO2.hints.CipCost.mandatory}"
+                                                          columns="#{bindings.UopLines_VO2.hints.CipCost.displayWidth}"
+                                                          maximumLength="#{bindings.UopLines_VO2.hints.CipCost.precision}"
+                                                          shortDesc="#{bindings.UopLines_VO2.hints.CipCost.tooltip}"
+                                                          id="it23">
+                                                <f:validator binding="#{row.bindings.CipCost.validator}"/>
+                                                <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UopLines_VO2.hints.CipCaptizationCost.label}"
+                                                   id="c26" width="200"
+                                                   sortProperty="#{bindings.UopLines_VO2.hints.CipCaptizationCost.name}"
+                                                >
+                                            <af:inputText value="#{row.bindings.CipCaptizationCost.inputValue}"
+                                                          label="#{bindings.UopLines_VO2.hints.CipCaptizationCost.label}"
+                                                          disabled="true" autoSubmit="true"
+                                                          required="#{bindings.UopLines_VO2.hints.CipCaptizationCost.mandatory}"
+                                                          columns="#{bindings.UopLines_VO2.hints.CipCaptizationCost.displayWidth}"
+                                                          maximumLength="#{bindings.UopLines_VO2.hints.CipCaptizationCost.precision}"
+                                                          shortDesc="#{bindings.UopLines_VO2.hints.CipCaptizationCost.tooltip}"
+                                                          id="it24">
+                                                <f:validator binding="#{row.bindings.CipCaptizationCost.validator}"/>
+                                                <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.UopLines_VO2.hints.CipClsoingBalance.label}"
+                                                   id="c27" width="200"
+                                                   sortProperty="#{bindings.UopLines_VO2.hints.CipClsoingBalance.name}"
+                                                 >
+                                            <af:inputText value="#{row.bindings.CipClsoingBalance.inputValue}"
+                                                          label="#{bindings.UopLines_VO2.hints.CipClsoingBalance.label}"
+                                                          disabled="true" autoSubmit="true"
+                                                          required="#{bindings.UopLines_VO2.hints.CipClsoingBalance.mandatory}"
+                                                          columns="#{bindings.UopLines_VO2.hints.CipClsoingBalance.displayWidth}"
+                                                          maximumLength="#{bindings.UopLines_VO2.hints.CipClsoingBalance.precision}"
+                                                          shortDesc="#{bindings.UopLines_VO2.hints.CipClsoingBalance.tooltip}"
+                                                          id="it25">
+                                                <f:validator binding="#{row.bindings.CipClsoingBalance.validator}"/>
+                                                <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                                  pattern="###,###,###,###"/>
+                                            </af:inputText>
+                                        </af:column>
+                                    </af:table>
+                                </af:panelCollection>
+                            </af:panelBox>
+                        </af:showDetailItem>
+                    </af:panelTabbed>
+                </af:panelBox>
+            </af:panelBox>
+        </f:facet>
+        <f:facet name="footerStart"/>
+        <f:facet name="footer"/>
+        <f:facet name="footerEnd"/>
+        <f:facet name="startPanel"/>
+        <f:facet name="endPanel"/>
+        <f:facet name="headerStart"/>
+        <f:facet name="header"/>
+        <f:facet name="headerEnd"/>
+    </af:pageTemplate>
+</jsp:root>

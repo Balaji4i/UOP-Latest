@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.9.14" id="SearchWellPageDef"
+                Package="fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="WellMasterVO" RangeSize="6" DataControl="Oando_AMDataControl" id="WellMasterVOIterator"/>
+    <searchRegion Criteria="WellMasterVOCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="WellMasterVOIterator" id="WellMasterVOCriteriaQuery"/>
+    <iterator id="WellDtlsVOIterator" Binds="WellDtlsVO" DataControl="Oando_AMDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="WellMasterVOIterator" id="WellMasterVO">
+      <nodeDefinition DefName="model.vo.WellMasterVO" Name="WellMasterVO0">
+        <AttrNames>
+          <Item Value="WellCode"/>
+          <Item Value="WellName"/>
+          <Item Value="Trans_CompCode"/>
+          <Item Value="Trans_Search_Cmpy"/>
+          <Item Value="Trans_LedgerName"/>
+          <Item Value="CurrencyCode"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="WellMasterVOIterator" id="WellId">
+      <AttrNames>
+        <Item Value="WellId"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" DataControl="Oando_AMDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+  </bindings>
+</pageDefinition>

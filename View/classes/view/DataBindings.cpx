@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.2.1.9.14" id="DataBindings"
+             SeparateXMLFiles="false" Package="view" ClientType="Generic">
+             <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/pages/FilmStrip.jspx" usageId="view_FilmStripPageDef"/>
+    <page path="/fragment/AddEditTravelReq.jsff" usageId="view_AddEditTravelReqPageDef"/>
+    <page path="/fragment/SearchTravelReq.jsff" usageId="view_SearchTravelReqPageDef"/>
+    <page path="/WEB-INF/taskflow/AddEditTravelRequest_BTF.xml#AddEditTravelRequest_BTF@CreateInsert"
+          usageId="view_AddEditTravelRequest_BTF_AddEditTravelRequest_BTF_CreateInsertPageDef"/>
+    <page path="/WEB-INF/taskflow/AddEditTravelRequest_BTF.xml#AddEditTravelRequest_BTF@ExecuteWithParams"
+          usageId="view_AddEditTravelRequest_BTF_AddEditTravelRequest_BTF_ExecuteWithParamsPageDef"/>
+    <page path="/WEB-INF/taskflow/SearchTravelReq_BTF.xml#SearchTravelReq_BTF@Execute"
+          usageId="view_SearchTravelReq_BTF_SearchTravelReq_BTF_ExecutePageDef"/>
+    <page path="/fragment/AddEditWell.jsff" usageId="view_AddEditWellPageDef"/>
+    <page path="/fragment/SearchWell.jsff" usageId="view_SearchWellPageDef"/>
+    <page path="/WEB-INF/taskflow/AddEditWellHdrDtl.xml#AddEditWellHdrDtl@ExecuteWithParams"
+          usageId="view_AddEditWellHdrDtl_AddEditWellHdrDtl_ExecuteWithParamsPageDef"/>
+    <page path="/WEB-INF/taskflow/AddEditWellHdrDtl.xml#AddEditWellHdrDtl@CreateInsert"
+          usageId="view_AddEditWellHdrDtl_AddEditWellHdrDtl_CreateInsertPageDef"/>
+    <page path="/WEB-INF/taskflow/SearchWellHdrDtl_BTF.xml#SearchWellHdrDtl_BTF@Execute"
+          usageId="view_SearchWellHdrDtl_BTF_SearchWellHdrDtl_BTF_ExecutePageDef"/>
+    <page path="/fragment/addEditUop.jsff" usageId="view_addEditUopPageDef"/>
+    <page path="/fragment/searchUop.jsff" usageId="view_searchUopPageDef"/>
+    <page path="/WEB-INF/taskflow/SearchUop_BTF.xml#SearchUop_BTF@Execute"
+          usageId="view_SearchUop_BTF_SearchUop_BTF_ExecutePageDef"/>
+    <page path="/WEB-INF/taskflow/AddEditUop_BTF.xml#AddEditUop_BTF@CreateInsert"
+          usageId="view_AddEditUop_BTF_AddEditUop_BTF_CreateInsertPageDef"/>
+    <page path="/WEB-INF/taskflow/AddEditUop_BTF.xml#AddEditUop_BTF@ExecuteWithParams"
+          usageId="view_AddEditUop_BTF_AddEditUop_BTF_ExecuteWithParamsPageDef"/>
+    <page path="/WEB-INF/taskflow/SearchCipForm_BTF.xml#SearchCipForm_BTF@Execute"
+          usageId="view_SearchCipForm_BTF_SearchCipForm_BTF_ExecutePageDef"/>
+    <page path="/WEB-INF/taskflow/AddEditCip_BTF.xml#AddEditCip_BTF@CreateInsert"
+          usageId="view_AddEditCip_BTF_AddEditCip_BTF_CreateInsertPageDef"/>
+    <page path="/WEB-INF/taskflow/AddEditCip_BTF.xml#AddEditCip_BTF@ExecuteWithParams"
+          usageId="view_AddEditCip_BTF_AddEditCip_BTF_ExecuteWithParamsPageDef"/>
+    <page path="/fragment/SearchCip.jsff" usageId="view_SearchCipPageDef"/>
+    <page path="/fragment/AddEditCip.jsff" usageId="view_AddEditCipPageDef"/>
+    <page path="/WEB-INF/taskflow/SearchCipMaster_BTF.xml#SearchCipMaster_BTF@Execute"
+          usageId="view_SearchCipMaster_BTF_SearchCipMaster_BTF_ExecutePageDef"/>
+    <page path="/WEB-INF/taskflow/AddEditCipMaster_BTF.xml#AddEditCipMaster_BTF@CreateInsert"
+          usageId="view_AddEditCipMaster_BTF_AddEditCipMaster_BTF_CreateInsertPageDef"/>
+    <page path="/WEB-INF/taskflow/AddEditCipMaster_BTF.xml#AddEditCipMaster_BTF@ExecuteWithParams"
+          usageId="view_AddEditCipMaster_BTF_AddEditCipMaster_BTF_ExecuteWithParamsPageDef"/>
+    <page path="/fragment/SearchCipMaster.jsff" usageId="view_SearchCipMasterPageDef"/>
+    <page path="/WEB-INF/taskflow/SearchRetirement_BTF.xml#SearchRetirement_BTF@Execute"
+          usageId="view_SearchRetirement_BTF_SearchRetirement_ExecutePageDef"/>
+    <page path="/WEB-INF/taskflow/AddEditRetirement_BTF.xml#AddEditRetirement_BTF@ExecuteWithParams"
+          usageId="view_AddEditRetirement_BTF_AddEditRetirement_ExecuteWithParamsPageDef"/>
+    <page path="/fragment/SearchRetirement.jsff" usageId="view_SearchRetirementPageDef"/>
+    <page path="/fragment/AddEditCipMaster.jsff" usageId="view_AddEditCipMasterPageDef"/>
+    <page path="/fragment/AddEditRetirement.jsff" usageId="view_AddEditRetirementPageDef"/>
+    <page path="/WEB-INF/taskflow/AddEditRetirement_BTF.xml#AddEditRetirement_BTF@CreateInsert"
+          usageId="view_AddEditRetirement_BTF_AddEditRetirement_BTF_CreateInsertPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="view_FilmStripPageDef" path="pages.FilmStripPageDef"/>
+    <page id="view_AddEditTravelReqPageDef" path="fragment.AddEditTravelReqPageDef"/>
+    <page id="view_SearchTravelReqPageDef" path="fragment.SearchTravelReqPageDef"/>
+    <page id="view_AddEditTravelRequest_BTF_AddEditTravelRequest_BTF_CreateInsertPageDef"
+          path="taskflow.AddEditTravelRequest_BTF_AddEditTravelRequest_BTF_CreateInsertPageDef"/>
+    <page id="view_AddEditTravelRequest_BTF_AddEditTravelRequest_BTF_ExecuteWithParamsPageDef"
+          path="taskflow.AddEditTravelRequest_BTF_AddEditTravelRequest_BTF_ExecuteWithParamsPageDef"/>
+    <page id="view_SearchTravelReq_BTF_SearchTravelReq_BTF_ExecutePageDef"
+          path="taskflow.SearchTravelReq_BTF_SearchTravelReq_BTF_ExecutePageDef"/>
+    <page id="view_AddEditWellPageDef" path="fragment.AddEditWellPageDef"/>
+    <page id="view_SearchWellPageDef" path="fragment.SearchWellPageDef"/>
+    <page id="view_AddEditWellHdrDtl_AddEditWellHdrDtl_ExecuteWithParamsPageDef"
+          path="taskflow.AddEditWellHdrDtl_AddEditWellHdrDtl_ExecuteWithParamsPageDef"/>
+    <page id="view_AddEditWellHdrDtl_AddEditWellHdrDtl_CreateInsertPageDef"
+          path="taskflow.AddEditWellHdrDtl_AddEditWellHdrDtl_CreateInsertPageDef"/>
+    <page id="view_SearchWellHdrDtl_BTF_SearchWellHdrDtl_BTF_ExecutePageDef"
+          path="taskflow.SearchWellHdrDtl_BTF_SearchWellHdrDtl_BTF_ExecutePageDef"/>
+    <page id="view_addEditUopPageDef" path="fragment.addEditUopPageDef"/>
+    <page id="view_searchUopPageDef" path="fragment.searchUopPageDef"/>
+    <page id="view_SearchUop_BTF_SearchUop_BTF_ExecutePageDef"
+          path="taskflow.SearchUop_BTF_SearchUop_BTF_ExecutePageDef"/>
+    <page id="view_AddEditUop_BTF_AddEditUop_BTF_CreateInsertPageDef"
+          path="taskflow.AddEditUop_BTF_AddEditUop_BTF_CreateInsertPageDef"/>
+    <page id="view_AddEditUop_BTF_AddEditUop_BTF_ExecuteWithParamsPageDef"
+          path="taskflow.AddEditUop_BTF_AddEditUop_BTF_ExecuteWithParamsPageDef"/>
+    <page id="view_SearchCipForm_BTF_SearchCipForm_BTF_ExecutePageDef"
+          path="taskflow.SearchCipForm_BTF_SearchCipForm_BTF_ExecutePageDef"/>
+    <page id="view_AddEditCip_BTF_AddEditCip_BTF_CreateInsertPageDef"
+          path="taskflow.AddEditCip_BTF_AddEditCip_BTF_CreateInsertPageDef"/>
+    <page id="view_AddEditCip_BTF_AddEditCip_BTF_ExecuteWithParamsPageDef"
+          path="taskflow.AddEditCip_BTF_AddEditCip_BTF_ExecuteWithParamsPageDef"/>
+    <page id="view_SearchCipPageDef" path="fragment.SearchCipPageDef"/>
+    <page id="view_AddEditCipPageDef" path="fragment.AddEditCipPageDef"/>
+    <page id="view_SearchCipMaster_BTF_SearchCipMaster_BTF_ExecutePageDef"
+          path="taskflow.SearchCipMaster_BTF_SearchCipMaster_BTF_ExecutePageDef"/>
+    <page id="view_AddEditCipMaster_BTF_AddEditCipMaster_BTF_CreateInsertPageDef"
+          path="taskflow.AddEditCipMaster_BTF_AddEditCipMaster_BTF_CreateInsertPageDef"/>
+    <page id="view_AddEditCipMaster_BTF_AddEditCipMaster_BTF_ExecuteWithParamsPageDef"
+          path="taskflow.AddEditCipMaster_BTF_AddEditCipMaster_BTF_ExecuteWithParamsPageDef"/>
+    <page id="view_SearchCipMasterPageDef" path="fragment.SearchCipMasterPageDef"/>
+    <page id="view_SearchRetirement_BTF_SearchRetirement_ExecutePageDef"
+          path="taskflow.SearchRetirement_BTF_SearchRetirement_ExecutePageDef"/>
+    <page id="view_AddEditRetirement_BTF_AddEditRetirement_ExecuteWithParamsPageDef"
+          path="taskflow.AddEditRetirement_BTF_AddEditRetirement_ExecuteWithParamsPageDef"/>
+    <page id="view_SearchRetirementPageDef" path="fragment.SearchRetirementPageDef"/>
+    <page id="view_AddEditCipMasterPageDef" path="fragment.AddEditCipMasterPageDef"/>
+    <page id="view_AddEditRetirementPageDef" path="fragment.AddEditRetirementPageDef"/>
+    <page id="view_AddEditRetirement_BTF_AddEditRetirement_BTF_CreateInsertPageDef"
+          path="taskflow.AddEditRetirement_BTF_AddEditRetirement_BTF_CreateInsertPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="Oando_AMDataControl" Package="model.am"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="Oando_AMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

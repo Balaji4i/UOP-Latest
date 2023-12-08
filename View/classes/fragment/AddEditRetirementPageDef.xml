@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.9.14" id="AddEditRetirementPageDef"
+                Package="fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Retirement_VO" RangeSize="25" DataControl="Oando_AMDataControl" id="Retirement_VOIterator"/>
+    <iterator Binds="Attachment_VO1" RangeSize="25" DataControl="Oando_AMDataControl" id="Attachment_VO1Iterator"/>
+    <iterator Binds="RetirementLines_VO" RangeSize="25" DataControl="Oando_AMDataControl"
+              id="RetirementLines_VOIterator"/>
+    <iterator Binds="CIPAssestCategory_ROVO" RangeSize="10" DataControl="Oando_AMDataControl"
+              id="CIPAssestCategory_ROVOIterator"/>
+    <searchRegion Binds="CIPAssestCategory_ROVOIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="CIPAssestCategory_ROVOQuery"/>
+  </executables>
+  <bindings>
+    <listOfValues IterBinding="Retirement_VOIterator" StaticList="false" Uses="LOV_Trans_WellName" id="Trans_WellName"/>
+    <attributeValues IterBinding="Retirement_VOIterator" id="TransactionNum">
+      <AttrNames>
+        <Item Value="TransactionNum"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="Retirement_VOIterator" id="AssetBookCode">
+      <AttrNames>
+        <Item Value="AssetBookCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="Retirement_VOIterator" id="Trans_CompanyCode">
+      <AttrNames>
+        <Item Value="Trans_CompanyCode"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="Retirement_VOIterator" StaticList="false" Uses="LOV_PeriodName" id="PeriodName"/>
+    <attributeValues IterBinding="Retirement_VOIterator" id="Status">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" DataControl="Oando_AMDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" DataControl="Oando_AMDataControl" RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <attributeValues IterBinding="Retirement_VOIterator" id="Trans_AssetBookName">
+      <AttrNames>
+        <Item Value="Trans_AssetBookName"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="Retirement_VOIterator" StaticList="false" Uses="LOV_Trans_Category" id="Trans_Category"/>
+    <button IterBinding="Retirement_VOIterator" id="GlTransferFlag" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="GlTransferFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <tree IterBinding="Attachment_VO1Iterator" id="Attachment_VO1">
+      <nodeDefinition DefName="model.vo.Attachment_VO" Name="Attachment_VO10">
+        <AttrNames>
+          <Item Value="Attachment"/>
+          <Item Value="AttachmentId"/>
+          <Item Value="AttachmentName"/>
+          <Item Value="AttachmentType"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdateLogin"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="SourceDocument"/>
+          <Item Value="SourceDocumentId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="Attachment_VO1Iterator" id="Delete" InstanceName="Oando_AMDataControl.Attachment_VO1"
+            DataControl="Oando_AMDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="RetirementLines_VOIterator" id="Delete1" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <tree IterBinding="RetirementLines_VOIterator" id="RetirementLines_VO">
+      <nodeDefinition DefName="model.vo.RetirementLines_VO" Name="RetirementLines_VO0">
+        <AttrNames>
+          <Item Value="AssetCategoryId"/>
+          <Item Value="AccumDeprnCost"/>
+          <Item Value="AssetCost"/>
+          <Item Value="DeprnReserveCost"/>
+          <Item Value="RetirementCost"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="CIPAssestCategory_ROVOIterator" id="CIPAssestCategory_ROVO">
+      <nodeDefinition DefName="model.ro.CIPAssestCategory_ROVO" Name="CIPAssestCategory_ROVO0">
+        <AttrNames>
+          <Item Value="Description"/>
+          <Item Value="CcTotAccuAssetCst"/>
+          <Item Value="CcTotAccuDepr"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="CIPAssestCategory_ROVOIterator" id="Trans_Select" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Trans_Select"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="Retirement_VOIterator" id="Notes">
+      <AttrNames>
+        <Item Value="Notes"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="Retirement_VOIterator" id="SetFlag">
+      <AttrNames>
+        <Item Value="SetFlag"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

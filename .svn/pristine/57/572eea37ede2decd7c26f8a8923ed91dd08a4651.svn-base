@@ -1,0 +1,328 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+    <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/MainPageTemplate.jspx" id="pt1">
+        <f:facet name="pageContents">
+            <af:panelBox id="pb1">
+                <af:panelGridLayout id="pgl1">
+                    <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+                        <af:gridCell marginStart="5px" width="50%" id="gc1">
+                            <af:outputText value="WELL DETAIL FORM" id="ot1"
+                                           inlineStyle="font-size:large; font-weight:bold"/>
+                        </af:gridCell>
+                        <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc2" halign="end">
+                            <af:panelGroupLayout id="pgl2" layout="horizontal" halign="left">
+                                <af:button text="Submit" rendered="false" id="b2"/>
+                                <af:spacer width="10" height="10" id="s1"/>
+                                <af:button text="Save" id="b3" partialTriggers="pc1:cil3"
+                                           disabled="#{bindings.WellDtlsVO.estimatedRowCount eq 0 ? true : false}"
+                                           actionListener="#{backingBeanScope.AddEditWell.onClickSave}"/>
+                                <af:spacer width="10" height="10" id="s2"/>
+                                <af:button text="Cancel" id="b1"
+                                           actionListener="#{backingBeanScope.AddEditWell.onClickCancel}"
+                                           immediate="true" action="back">
+                                    <af:setPropertyListener type="action" from="0" to="#{pageFlowScope.headerId}"/>
+                                </af:button>
+                            </af:panelGroupLayout>
+                            <!--<af:button actionListener="#{bindings.Rollback.execute}" text="Cancel"
+                                       disabled="#{!bindings.Rollback.enabled}" immediate="true" id="b5">
+                                <af:resetActionListener/>
+                            </af:button>-->
+                            <af:button actionListener="#{bindings.CreateInsert.execute}" text="CreateInsert"
+                                       rendered="false" id="b4"/>
+                        </af:gridCell>
+                    </af:gridRow>
+                </af:panelGridLayout>
+                <f:facet name="toolbar"/>
+                <af:panelGroupLayout id="pgl3" layout="horizontal" styleClass="AFStretchWidth">
+                    <af:panelFormLayout id="pfl1" maxColumns="2" rows="4">
+                        <af:inputComboboxListOfValues id="trans_CompCodeId" contentStyle="width:300px;"
+                                                      popupTitle="Search and Select: #{bindings.Trans_CompCode.hints.label}"
+                                                      value="#{bindings.Trans_CompCode.inputValue}"
+                                                      label="#{bindings.Trans_CompCode.hints.label}"
+                                                      disabled="#{pageFlowScope.mode eq 'edit' ? true : false}"
+                                                      model="#{bindings.Trans_CompCode.listOfValuesModel}"
+                                                      required="#{bindings.Trans_CompCode.hints.mandatory}"
+                                                      columns="#{bindings.Trans_CompCode.hints.displayWidth}"
+                                                      shortDesc="#{bindings.Trans_CompCode.hints.tooltip}"
+                                                      autoSubmit="true" partialTriggers="trans_EntityId">
+                            <f:validator binding="#{bindings.Trans_CompCode.validator}"/>
+                        </af:inputComboboxListOfValues>
+                        <af:inputComboboxListOfValues id="wellCodeId" contentStyle="width:300px;"
+                                                      popupTitle="Search and Select: #{bindings.WellCode.hints.label}"
+                                                      value="#{bindings.WellCode.inputValue}"
+                                                      label="#{bindings.WellCode.hints.label}"
+                                                      disabled="#{pageFlowScope.mode eq 'edit' ? true : false}"
+                                                      model="#{bindings.WellCode.listOfValuesModel}"
+                                                      required="#{bindings.WellCode.hints.mandatory}"
+                                                      columns="#{bindings.WellCode.hints.displayWidth}"
+                                                      shortDesc="#{bindings.WellCode.hints.tooltip}">
+                            <f:validator binding="#{bindings.WellCode.validator}"/>
+                        </af:inputComboboxListOfValues>
+                        <af:inputComboboxListOfValues id="trans_BusUnitId"
+                                                      popupTitle="Search and Select: #{bindings.Trans_BusUnit.hints.label}"
+                                                      value="#{bindings.Trans_BusUnit.inputValue}"
+                                                      label="#{bindings.Trans_BusUnit.hints.label}"
+                                                      disabled="#{pageFlowScope.mode eq 'edit' ? true : false}"
+                                                      model="#{bindings.Trans_BusUnit.listOfValuesModel}"
+                                                      required="#{bindings.Trans_BusUnit.hints.mandatory}"
+                                                      columns="#{bindings.Trans_BusUnit.hints.displayWidth}"
+                                                      shortDesc="#{bindings.Trans_BusUnit.hints.tooltip}"
+                                                      rendered="false" contentStyle="width:325px;">
+                            <f:validator binding="#{bindings.Trans_BusUnit.validator}"/>
+                        </af:inputComboboxListOfValues>
+                        <af:inputText value="#{bindings.LedgerId.inputValue}" label="#{bindings.LedgerId.hints.label}"
+                                      required="#{bindings.LedgerId.hints.mandatory}" disabled="true"
+                                      contentStyle="width:200px;" partialTriggers="trans_CompCodeId"
+                                      columns="#{bindings.LedgerId.hints.displayWidth}"
+                                      maximumLength="#{bindings.LedgerId.hints.precision}"
+                                      shortDesc="#{bindings.LedgerId.hints.tooltip}" id="it4" rendered="false">
+                            <f:validator binding="#{bindings.LedgerId.validator}"/>
+                            <af:convertNumber groupingUsed="false" pattern="#{bindings.LedgerId.format}"/>
+                        </af:inputText>
+                        <af:inputComboboxListOfValues id="trans_EntityId"
+                                                      popupTitle="Search and Select: #{bindings.Trans_Entity.hints.label}"
+                                                      value="#{bindings.Trans_Entity.inputValue}"
+                                                      label="#{bindings.Trans_Entity.hints.label}"
+                                                      contentStyle="width:300px;"
+                                                      disabled="#{pageFlowScope.mode eq 'edit' ? true : false}"
+                                                      model="#{bindings.Trans_Entity.listOfValuesModel}"
+                                                      required="#{bindings.Trans_Entity.hints.mandatory}"
+                                                      columns="#{bindings.Trans_Entity.hints.displayWidth}"
+                                                      shortDesc="#{bindings.Trans_Entity.hints.tooltip}"
+                                                      partialTriggers="trans_CompCodeId">
+                            <f:validator binding="#{bindings.Trans_Entity.validator}"/>
+                        </af:inputComboboxListOfValues>                      
+                        <af:selectOneChoice value="#{bindings.CurrencyCode.inputValue}"
+                                            label="#{bindings.CurrencyCode.label}" contentStyle="width:325px;"
+                                            required="#{bindings.CurrencyCode.hints.mandatory}"
+                                            shortDesc="#{bindings.CurrencyCode.hints.tooltip}" disabled="true"
+                                            id="soc1">
+                            <f:selectItems value="#{bindings.CurrencyCode.items}" id="si2"/>
+                            <f:validator binding="#{bindings.CurrencyCode.validator}"/>
+                        </af:selectOneChoice>
+                          <af:inputText value="#{bindings.Remarks.inputValue}" label="#{bindings.Remarks.hints.label}"
+                                      required="#{bindings.Remarks.hints.mandatory}"
+                                      columns="#{bindings.Remarks.hints.displayWidth}"
+                                      maximumLength="#{bindings.Remarks.hints.precision}"
+                                      disabled="#{pageFlowScope.mode eq 'edit' ? true : false}"
+                                      shortDesc="#{bindings.Remarks.hints.tooltip}" id="it12" rows="5"
+                                      contentStyle="width:325px;">
+                            <f:validator binding="#{bindings.Remarks.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.Trans_AssetBookName.inputValue}" contentStyle="width:325px;"
+                                      label="#{bindings.Trans_AssetBookName.hints.label}" disabled="true"
+                                      partialTriggers="trans_CompCodeId"
+                                      required="#{bindings.Trans_AssetBookName.hints.mandatory}"
+                                      columns="#{bindings.Trans_AssetBookName.hints.displayWidth}"
+                                      maximumLength="#{bindings.Trans_AssetBookName.hints.precision}"
+                                      shortDesc="#{bindings.Trans_AssetBookName.hints.tooltip}" id="it2">
+                            <f:validator binding="#{bindings.Trans_AssetBookName.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.WellName.inputValue}" label="#{bindings.WellName.hints.label}"
+                                      required="#{bindings.WellName.hints.mandatory}" contentStyle="width:325px;"
+                                      columns="#{bindings.WellName.hints.displayWidth}" disabled="true"
+                                      maximumLength="#{bindings.WellName.hints.precision}"
+                                      shortDesc="#{bindings.WellName.hints.tooltip}" partialTriggers="wellCodeId"
+                                      id="it1">
+                            <f:validator binding="#{bindings.WellName.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.Trans_LedgerName.inputValue}"
+                                      label="#{bindings.Trans_LedgerName.hints.label}" disabled="true"
+                                      partialTriggers="trans_CompCodeId" contentStyle="width:325px;"
+                                      required="#{bindings.Trans_LedgerName.hints.mandatory}"
+                                      columns="#{bindings.Trans_LedgerName.hints.displayWidth}"
+                                      maximumLength="#{bindings.Trans_LedgerName.hints.precision}"
+                                      shortDesc="#{bindings.Trans_LedgerName.hints.tooltip}" id="it3">
+                            <f:validator binding="#{bindings.Trans_LedgerName.validator}"/>
+                        </af:inputText>
+                        <af:inputComboboxListOfValues id="trans_WellBlockNameId"
+                                                      popupTitle="Search and Select: #{bindings.Trans_WellBlockName.hints.label}"
+                                                      value="#{bindings.Trans_WellBlockName.inputValue}"
+                                                      label="#{bindings.Trans_WellBlockName.hints.label}"
+                                                      contentStyle="width:300px;"
+                                                      disabled="#{pageFlowScope.mode eq 'edit' ? true : false}"
+                                                      model="#{bindings.Trans_WellBlockName.listOfValuesModel}"
+                                                      required="#{bindings.Trans_WellBlockName.hints.mandatory}"
+                                                      columns="#{bindings.Trans_WellBlockName.hints.displayWidth}"
+                                                      shortDesc="#{bindings.Trans_WellBlockName.hints.tooltip}">
+                            <f:validator binding="#{bindings.Trans_WellBlockName.validator}"/>
+                        </af:inputComboboxListOfValues>
+                        <af:selectBooleanCheckbox value="#{bindings.IsActive.inputValue}"
+                                                  label="#{bindings.IsActive.label}"
+                                                  shortDesc="#{bindings.IsActive.hints.tooltip}" id="sbc1"
+                                                  autoSubmit="true"/>
+                        <af:outputText value="#{bindings.IsActive.inputValue eq true ? 'Active' : 'In-Active'}" id="ot2"
+                                       rendered="false"/>
+                    </af:panelFormLayout>
+                </af:panelGroupLayout>
+                <af:spacer width="10" height="10" id="s3"/>
+                <af:panelTabbed position="above" id="pt2">
+                    <af:showDetailItem text="Net Reserve" id="sdi1">
+                        <af:panelBox id="pb2" inlineStyle="border-color:transparent;" showDisclosure="false">
+                            <f:facet name="toolbar"/>
+                            <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar">
+                                    <af:toolbar id="t2" flex="1">
+                                        <af:panelGroupLayout id="pgl6" layout="horizontal" halign="right">
+                                            <af:link id="cil3" icon="/images/func_add_16_ena.png"
+                                                     actionListener="#{backingBeanScope.AddEditWell.onClickAdd}"
+                                                     hoverIcon="/images/func_add_16_hov.png" partialSubmit="true"
+                                                     action="addEdit"></af:link>
+                                            <af:spacer width="10" height="10" id="s5"/>
+                                            <af:link icon="/images/func_remove_16_ena.png"
+                                                     hoverIcon="/images/func_remove_16_hov.png"
+                                                     depressedIcon="/images/func_report_16_act.png"
+                                                     disabledIcon="/images/func_remove_16_dis.png" partialSubmit="true"
+                                                     id="l2"
+                                                     actionListener="#{backingBeanScope.AddEditWell.onClickDelete}"></af:link>
+                                        </af:panelGroupLayout>
+                                    </af:toolbar>
+                                </f:facet>
+                                <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.WellDtlsVO.collectionModel}" var="row"
+                                          rows="#{bindings.WellDtlsVO.rangeSize}"
+                                          emptyText="#{bindings.WellDtlsVO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          rowBandingInterval="0"
+                                          selectedRowKeys="#{bindings.WellDtlsVO.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.WellDtlsVO.collectionModel.makeCurrent}"
+                                          rowSelection="single" fetchSize="#{bindings.WellDtlsVO.rangeSize}" id="t1">
+                                    <af:column headerText="#{bindings.WellDtlsVO.hints.EffectiveStartDate.label}"
+                                               id="c1" width="370">
+                                        <af:inputDate value="#{row.bindings.EffectiveStartDate.inputValue}"
+                                                      label="#{bindings.WellDtlsVO.hints.EffectiveStartDate.label}"
+                                                      required="#{bindings.WellDtlsVO.hints.EffectiveStartDate.mandatory}"
+                                                      columns="#{bindings.WellDtlsVO.hints.EffectiveStartDate.displayWidth}"
+                                                      shortDesc="#{bindings.WellDtlsVO.hints.EffectiveStartDate.tooltip}"
+                                                      id="id2">
+                                            <f:validator binding="#{row.bindings.EffectiveStartDate.validator}"/>
+                                            <af:convertDateTime pattern="#{bindings.WellDtlsVO.hints.EffectiveStartDate.format}"/>
+                                        </af:inputDate>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.WellDtlsVO.hints.EffectiveEndDate.label}" id="c3"
+                                               width="370">
+                                        <af:inputDate value="#{row.bindings.EffectiveEndDate.inputValue}"
+                                                      label="#{bindings.WellDtlsVO.hints.EffectiveEndDate.label}"
+                                                      required="#{bindings.WellDtlsVO.hints.EffectiveEndDate.mandatory}"
+                                                      columns="#{bindings.WellDtlsVO.hints.EffectiveEndDate.displayWidth}"
+                                                      shortDesc="#{bindings.WellDtlsVO.hints.EffectiveEndDate.tooltip}"
+                                                      id="id1">
+                                            <f:validator binding="#{row.bindings.EffectiveEndDate.validator}"/>
+                                            <af:convertDateTime pattern="#{bindings.WellDtlsVO.hints.EffectiveEndDate.format}"/>
+                                        </af:inputDate>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.WellDtlsVO.hints.NetReserveAmt.label}" id="c2"
+                                               width="370">
+                                        <af:inputText value="#{row.bindings.NetReserveAmt.inputValue}"
+                                                      label="#{bindings.WellDtlsVO.hints.NetReserveAmt.label}"
+                                                      required="#{bindings.WellDtlsVO.hints.NetReserveAmt.mandatory}"
+                                                      columns="#{bindings.WellDtlsVO.hints.NetReserveAmt.displayWidth}"
+                                                      maximumLength="#{bindings.WellDtlsVO.hints.NetReserveAmt.precision}"
+                                                      shortDesc="#{bindings.WellDtlsVO.hints.NetReserveAmt.tooltip}"
+                                                      id="it11">
+                                            <f:validator binding="#{row.bindings.NetReserveAmt.validator}"/>
+                                            <af:convertNumber minFractionDigits="2" maxFractionDigits="2"
+                                                              pattern="###,###,###,###"/>
+                                        </af:inputText>
+                                    </af:column>
+                                </af:table>
+                            </af:panelCollection>
+                        </af:panelBox>
+                    </af:showDetailItem>
+                    <af:showDetailItem text="Child Well Details" id="sdi2">
+                        <af:panelBox id="pb3" inlineStyle="border-color:transparent;" showDisclosure="false">
+                            <f:facet name="toolbar"/>
+                            <af:panelCollection id="pc2" styleClass="AFStretchWidth">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar">
+                                    <af:toolbar id="t4" flex="1">
+                                        <af:panelGroupLayout id="pgl4" layout="horizontal" halign="right">
+                                            <af:link id="l1" icon="/images/func_add_16_ena.png"
+                                                     actionListener="#{backingBeanScope.AddEditWell.onClickAddChild}"
+                                                     hoverIcon="/images/func_add_16_hov.png" partialSubmit="true"
+                                                     action="addEdit"></af:link>
+                                            <af:spacer width="10" height="10" id="s4"/>
+                                            <af:link icon="/images/func_remove_16_ena.png"
+                                                     hoverIcon="/images/func_remove_16_hov.png"
+                                                     depressedIcon="/images/func_report_16_act.png"
+                                                     disabledIcon="/images/func_remove_16_dis.png" partialSubmit="true"
+                                                     id="l3"
+                                                     actionListener="#{backingBeanScope.AddEditWell.onClickDeleteChild}"></af:link>
+                                        </af:panelGroupLayout>
+                                    </af:toolbar>
+                                </f:facet>
+                                <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.WellChild_VO.collectionModel}" var="row"
+                                          rows="#{bindings.WellChild_VO.rangeSize}"
+                                          emptyText="#{bindings.WellChild_VO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          rowBandingInterval="0"
+                                          selectedRowKeys="#{bindings.WellChild_VO.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.WellChild_VO.collectionModel.makeCurrent}"
+                                          rowSelection="single" fetchSize="#{bindings.WellChild_VO.rangeSize}" id="t3">
+                                    <!--af:column headerText="#{bindings.WellChild_VO.hints.ChildWellCode.label}" id="c4">
+                                        <af:inputListOfValues id="childWellCodeId"
+                                         contentStyle="width:300px;"
+                                                              popupTitle="Search and Select: #{bindings.WellChild_VO.hints.ChildWellCode.label}"
+                                                              value="#{row.bindings.ChildWellCode.inputValue}"
+                                                              model="#{row.bindings.ChildWellCode.listOfValuesModel}"
+                                                              required="#{bindings.WellChild_VO.hints.ChildWellCode.mandatory}"
+                                                              columns="#{bindings.WellChild_VO.hints.ChildWellCode.displayWidth}"
+                                                              shortDesc="#{bindings.WellChild_VO.hints.ChildWellCode.tooltip}"
+                                                              converter="#{row.bindings.ChildWellCode.converter}">
+                                            <f:validator binding="#{row.bindings.ChildWellCode.validator}"/>
+                                        </af:inputListOfValues>
+                                        
+                                    </af:column-->
+                                    <af:column headerText="Child Well Name" width="370" id="c7">
+                                        <af:inputComboboxListOfValues id="trans_ChildWellCodeId"
+                                                                      popupTitle="Search and Select: #{bindings.WellChild_VO.hints.Trans_ChildWellCode.label}"
+                                                                      value="#{row.bindings.Trans_ChildWellCode.inputValue}"
+                                                                      model="#{row.bindings.Trans_ChildWellCode.listOfValuesModel}"
+                                                                      required="#{bindings.WellChild_VO.hints.Trans_ChildWellCode.mandatory}"
+                                                                      columns="#{bindings.WellChild_VO.hints.Trans_ChildWellCode.displayWidth}"
+                                                                      shortDesc="#{bindings.WellChild_VO.hints.Trans_ChildWellCode.tooltip}">
+                                            <f:validator binding="#{row.bindings.Trans_ChildWellCode.validator}"/>
+                                        </af:inputComboboxListOfValues>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.WellChild_VO.hints.EffectiveStartDate.label}"
+                                               width="370" id="c6">
+                                        <af:inputDate value="#{row.bindings.EffectiveStartDate.inputValue}"
+                                                      label="#{bindings.WellChild_VO.hints.EffectiveStartDate.label}"
+                                                      required="#{bindings.WellChild_VO.hints.EffectiveStartDate.mandatory}"
+                                                      columns="#{bindings.WellChild_VO.hints.EffectiveStartDate.displayWidth}"
+                                                      shortDesc="#{bindings.WellChild_VO.hints.EffectiveStartDate.tooltip}"
+                                                      id="id4">
+                                            <f:validator binding="#{row.bindings.EffectiveStartDate.validator}"/>
+                                           <af:convertDateTime pattern="#{bindings.WellChild_VO.hints.EffectiveStartDate.format}"/>
+                                        </af:inputDate>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.WellChild_VO.hints.EffectiveEndDate.label}"
+                                               width="370" id="c5">
+                                        <af:inputDate value="#{row.bindings.EffectiveEndDate.inputValue}"
+                                                      label="#{bindings.WellChild_VO.hints.EffectiveEndDate.label}"
+                                                      required="#{bindings.WellChild_VO.hints.EffectiveEndDate.mandatory}"
+                                                      columns="#{bindings.WellChild_VO.hints.EffectiveEndDate.displayWidth}"
+                                                      shortDesc="#{bindings.WellChild_VO.hints.EffectiveEndDate.tooltip}"
+                                                      id="id3">
+                                            <f:validator binding="#{row.bindings.EffectiveEndDate.validator}"/>
+                                           <af:convertDateTime pattern="#{bindings.WellChild_VO.hints.EffectiveEndDate.format}"/>
+                                        </af:inputDate>
+                                    </af:column>
+                                </af:table>
+                            </af:panelCollection>
+                        </af:panelBox>
+                    </af:showDetailItem>
+                </af:panelTabbed>
+            </af:panelBox>
+        </f:facet>
+        <f:facet name="footerStart"/>
+        <f:facet name="footer"/>
+        <f:facet name="footerEnd"/>
+        <f:facet name="startPanel"/>
+        <f:facet name="endPanel"/>
+        <f:facet name="headerStart"/>
+        <f:facet name="header"/>
+        <f:facet name="headerEnd"/>
+    </af:pageTemplate>
+</jsp:root>

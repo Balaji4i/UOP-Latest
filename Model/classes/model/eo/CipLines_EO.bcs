@@ -1,0 +1,12 @@
+//Groovy Scripts for model.eo.CipLines_EO
+
+package model.eo
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="TransactionLineId")
+def TransactionLineId_ExpressionScript_Expression()
+{
+new oracle.jbo.server.SequenceImpl("XXFA_ASSET_CAPIT_LINES_S",adf.object.getDBTransaction()).getSequenceNumber()
+}
+

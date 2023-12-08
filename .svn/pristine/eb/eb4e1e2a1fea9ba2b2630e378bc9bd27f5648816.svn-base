@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+    <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/MainPageTemplate.jspx" id="pt1">
+        <f:facet name="pageContents">
+            <af:panelGroupLayout layout="vertical" id="pgl1">
+                <af:panelHeader text="Capitalize CIP" id="ph1">
+                    <af:query id="qryId1" headerText="Search" disclosed="true"
+                              value="#{bindings.CipVOSearchVCQuery.queryDescriptor}"
+                              model="#{bindings.CipVOSearchVCQuery.queryModel}"
+                              queryListener="#{bindings.CipVOSearchVCQuery.processQuery}"
+                              queryOperationListener="#{bindings.CipVOSearchVCQuery.processQueryOperation}"/>
+                </af:panelHeader>
+                <af:panelBox id="pb1">
+                    <f:facet name="toolbar"/>
+                    <af:panelCollection id="pc1" styleClass=" AFStretchWidth">
+                        <f:facet name="menus"/>
+                        <f:facet name="toolbar">
+                            <af:toolbar id="t2" flex="1">
+                             <af:panelGroupLayout id="pgl2" layout="horizontal" halign="right">
+                                    <af:link id="cil3" icon="/images/func_add_16_ena.png"
+                                             hoverIcon="/images/func_add_16_hov.png" partialSubmit="true"
+                                             action="addEdit">
+                                        <af:setPropertyListener from="#{'add'}" to="#{pageFlowScope.mode}"
+                                                                type="action"/>
+                                        <af:setPropertyListener from="#{null}" to="#{pageFlowScope.headerId}"
+                                                                type="action"/>
+                                    </af:link>
+                                
+                                <af:spacer width="10" height="10" id="s1"/>
+                                <af:link hoverIcon="/images/func_pencil_16_hov.png" action="addEdit"
+                                         depressedIcon="/images/func_pencil_16_act.png"
+                                         icon="/images/func_pencil_16_ena.png" partialSubmit="true"
+                                         disabledIcon="/images/func_pencil_16_dis.png" id="l2" 
+                                        actionListener="#{backingBeanScope.SearchCip.onClickEdit}">
+                                    <af:setPropertyListener from="#{'edit'}" to="#{pageFlowScope.mode}" type="action"/>
+                                    <af:setPropertyListener from="#{bindings.CipCapId.inputValue}"
+                                                            to="#{pageFlowScope.headerId}" type="action"/>
+                                </af:link>
+                                </af:panelGroupLayout>
+                            </af:toolbar>
+                        </f:facet>
+                        <f:facet name="statusbar"/>
+                        <af:table value="#{bindings.Cip_VO.collectionModel}" var="row"
+                                  rows="#{bindings.Cip_VO.rangeSize}"
+                                  emptyText="#{bindings.Cip_VO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  rowBandingInterval="0"
+                                  selectedRowKeys="#{bindings.Cip_VO.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.Cip_VO.collectionModel.makeCurrent}"
+                                  rowSelection="single" fetchSize="#{bindings.Cip_VO.rangeSize}"
+                                  filterModel="#{bindings.CipVOSearchVCQuery.queryDescriptor}" filterVisible="true"
+                                  queryListener="#{bindings.CipVOSearchVCQuery.processQuery}" varStatus="vs" id="t1">
+                            <af:column sortProperty="#{bindings.Cip_VO.hints.CompanyCode.name}" filterable="true"
+                                       headerText="#{bindings.Cip_VO.hints.CompanyCode.label}" id="c1">
+                                <af:inputText value="#{row.bindings.CompanyCode.inputValue}"
+                                              label="#{bindings.Cip_VO.hints.CompanyCode.label}"
+                                              required="#{bindings.Cip_VO.hints.CompanyCode.mandatory}"
+                                              columns="#{bindings.Cip_VO.hints.CompanyCode.displayWidth}"
+                                              maximumLength="#{bindings.Cip_VO.hints.CompanyCode.precision}"
+                                              shortDesc="#{bindings.Cip_VO.hints.CompanyCode.tooltip}" id="it1">
+                                    <f:validator binding="#{row.bindings.CompanyCode.validator}"/>
+                                </af:inputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.Cip_VO.hints.Trans_Well.name}" filterable="true"
+                                       headerText="#{bindings.Cip_VO.hints.Trans_Well.label}" id="c2">
+                                <af:inputListOfValues id="trans_WellId"
+                                                      popupTitle="Search and Select: #{bindings.Cip_VO.hints.Trans_Well.label}"
+                                                      value="#{row.bindings.Trans_Well.inputValue}"
+                                                      model="#{row.bindings.Trans_Well.listOfValuesModel}"
+                                                      required="#{bindings.Cip_VO.hints.Trans_Well.mandatory}"
+                                                      columns="#{bindings.Cip_VO.hints.Trans_Well.displayWidth}"
+                                                      shortDesc="#{bindings.Cip_VO.hints.Trans_Well.tooltip}">
+                                    <f:validator binding="#{row.bindings.Trans_Well.validator}"/>
+                                </af:inputListOfValues>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.Cip_VO.hints.CurrencyCode.name}" filterable="true"
+                                       headerText="#{bindings.Cip_VO.hints.CurrencyCode.label}" id="c3">
+                                <af:inputText value="#{row.bindings.CurrencyCode.inputValue}"
+                                              label="#{bindings.Cip_VO.hints.CurrencyCode.label}"
+                                              required="#{bindings.Cip_VO.hints.CurrencyCode.mandatory}"
+                                              columns="#{bindings.Cip_VO.hints.CurrencyCode.displayWidth}"
+                                              maximumLength="#{bindings.Cip_VO.hints.CurrencyCode.precision}"
+                                              shortDesc="#{bindings.Cip_VO.hints.CurrencyCode.tooltip}" id="it2">
+                                    <f:validator binding="#{row.bindings.CurrencyCode.validator}"/>
+                                </af:inputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.Cip_VO.hints.GlDate.name}" filterable="true"
+                                       headerText="#{bindings.Cip_VO.hints.GlDate.label}" id="c4">
+                                <f:facet name="filter">
+                                    <af:inputDate value="#{bindings.CipVOSearchVCQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.GlDate.value}"
+                                                  id="id1">
+                                        <af:convertDateTime pattern="#{bindings.Cip_VO.hints.GlDate.format}"/>
+                                    </af:inputDate>
+                                </f:facet>
+                                <af:inputDate value="#{row.bindings.GlDate.inputValue}"
+                                              label="#{bindings.Cip_VO.hints.GlDate.label}"
+                                              required="#{bindings.Cip_VO.hints.GlDate.mandatory}"
+                                              columns="#{bindings.Cip_VO.hints.GlDate.displayWidth}"
+                                              shortDesc="#{bindings.Cip_VO.hints.GlDate.tooltip}" id="id2">
+                                    <f:validator binding="#{row.bindings.GlDate.validator}"/>
+                                    <af:convertDateTime pattern="#{bindings.Cip_VO.hints.GlDate.format}"/>
+                                </af:inputDate>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.Cip_VO.hints.CumulativeCipCost.name}" filterable="true"
+                                       headerText="#{bindings.Cip_VO.hints.CumulativeCipCost.label}" id="c5">
+                                <af:inputText value="#{row.bindings.CumulativeCipCost.inputValue}"
+                                              label="#{bindings.Cip_VO.hints.CumulativeCipCost.label}"
+                                              required="#{bindings.Cip_VO.hints.CumulativeCipCost.mandatory}"
+                                              columns="#{bindings.Cip_VO.hints.CumulativeCipCost.displayWidth}"
+                                              maximumLength="#{bindings.Cip_VO.hints.CumulativeCipCost.precision}"
+                                              shortDesc="#{bindings.Cip_VO.hints.CumulativeCipCost.tooltip}" id="it3">
+                                    <f:validator binding="#{row.bindings.CumulativeCipCost.validator}"/>
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.Cip_VO.hints.CumulativeCipCost.format}"/>
+                                </af:inputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.Cip_VO.hints.CapitalizeAmount.name}" filterable="true"
+                                       headerText="#{bindings.Cip_VO.hints.CapitalizeAmount.label}" id="c6">
+                                <af:inputText value="#{row.bindings.CapitalizeAmount.inputValue}"
+                                              label="#{bindings.Cip_VO.hints.CapitalizeAmount.label}"
+                                              required="#{bindings.Cip_VO.hints.CapitalizeAmount.mandatory}"
+                                              columns="#{bindings.Cip_VO.hints.CapitalizeAmount.displayWidth}"
+                                              maximumLength="#{bindings.Cip_VO.hints.CapitalizeAmount.precision}"
+                                              shortDesc="#{bindings.Cip_VO.hints.CapitalizeAmount.tooltip}" id="it4">
+                                    <f:validator binding="#{row.bindings.CapitalizeAmount.validator}"/>
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.Cip_VO.hints.CapitalizeAmount.format}"/>
+                                </af:inputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.Cip_VO.hints.Status.name}" filterable="true"
+                                       headerText="#{bindings.Cip_VO.hints.Status.label}" id="c7">
+                                <af:inputText value="#{row.bindings.Status.inputValue}"
+                                              label="#{bindings.Cip_VO.hints.Status.label}"
+                                              required="#{bindings.Cip_VO.hints.Status.mandatory}"
+                                              columns="#{bindings.Cip_VO.hints.Status.displayWidth}"
+                                              maximumLength="#{bindings.Cip_VO.hints.Status.precision}"
+                                              shortDesc="#{bindings.Cip_VO.hints.Status.tooltip}" id="it5">
+                                    <f:validator binding="#{row.bindings.Status.validator}"/>
+                                </af:inputText>
+                            </af:column>
+                        </af:table>
+                    </af:panelCollection>
+                </af:panelBox>
+            </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="footerStart"/>
+        <f:facet name="footer"/>
+        <f:facet name="footerEnd"/>
+        <f:facet name="startPanel"/>
+        <f:facet name="endPanel"/>
+        <f:facet name="headerStart"/>
+        <f:facet name="header"/>
+        <f:facet name="headerEnd"/>
+    </af:pageTemplate>
+</jsp:root>

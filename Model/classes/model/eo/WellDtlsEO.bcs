@@ -1,0 +1,12 @@
+//Groovy Scripts for model.eo.WellDtlsEO
+
+package model.eo
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="WellDtlsId")
+def WellDtlsId_ExpressionScript_Expression()
+{
+new oracle.jbo.server.SequenceImpl("XXFA_WELL_DTLS_S",adf.object.getDBTransaction()).getSequenceNumber()
+}
+

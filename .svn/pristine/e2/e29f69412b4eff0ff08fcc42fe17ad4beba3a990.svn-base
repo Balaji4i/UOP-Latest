@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.9.14" id="AddEditWellPageDef"
+                Package="fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="WellMasterVO" RangeSize="25" DataControl="Oando_AMDataControl" id="WellMasterVOIterator"/>
+    <iterator Binds="WellDtlsVO" RangeSize="25" DataControl="Oando_AMDataControl" id="WellDtlsVOIterator"/>
+    <iterator Binds="WellChild_VO" RangeSize="25" DataControl="Oando_AMDataControl" id="WellChild_VOIterator"/>
+  </executables>
+  <bindings>
+    <listOfValues IterBinding="WellMasterVOIterator" StaticList="false" Uses="LOV_Trans_BusUnit" id="Trans_BusUnit"/>
+    <attributeValues IterBinding="WellMasterVOIterator" id="Remarks">
+      <AttrNames>
+        <Item Value="Remarks"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="WellMasterVOIterator" id="CreateInsert" InstanceName="Oando_AMDataControl.WellMasterVO"
+            DataControl="Oando_AMDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    
+    <list IterBinding="WellMasterVOIterator" StaticList="false" Uses="LOV_CurrencyCode" id="CurrencyCode"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <action id="Commit" DataControl="Oando_AMDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <tree IterBinding="WellDtlsVOIterator" id="WellDtlsVO">
+      <nodeDefinition DefName="model.vo.WellDtlsVO" Name="WellDtlsVO0">
+        <AttrNames>
+          <Item Value="EffectiveStartDate"/>
+          <Item Value="EffectiveEndDate"/>
+          <Item Value="NetReserveAmt"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="WellDtlsVOIterator" id="CreateInsert1" InstanceName="Oando_AMDataControl.WellDtlsVO"
+            DataControl="Oando_AMDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <attributeValues IterBinding="WellMasterVOIterator" id="WellId">
+      <AttrNames>
+        <Item Value="WellId"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Rollback1" DataControl="Oando_AMDataControl" RequiresUpdateModel="false" Action="rollbackTransaction"/>
+   
+    <action IterBinding="WellDtlsVOIterator" id="Delete" InstanceName="Oando_AMDataControl.WellDtlsVO"
+            DataControl="Oando_AMDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <listOfValues IterBinding="WellMasterVOIterator" StaticList="false" Uses="LOV_Trans_Entity" id="Trans_Entity"/>
+    <button IterBinding="WellMasterVOIterator" id="IsActive" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="IsActive"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <listOfValues IterBinding="WellMasterVOIterator" StaticList="false" Uses="LOV_WellCode" id="WellCode"/>
+    <attributeValues IterBinding="WellMasterVOIterator" id="WellName">
+      <AttrNames>
+        <Item Value="WellName"/>
+      </AttrNames>
+    </attributeValues>    
+    <tree IterBinding="WellChild_VOIterator" id="WellChild_VO">
+      <nodeDefinition DefName="model.vo.WellChild_VO" Name="WellChild_VO0">
+        <AttrNames>
+          <Item Value="ChildWellCode"/>
+          <Item Value="EffectiveEndDate"/>
+          <Item Value="EffectiveStartDate"/>
+          <Item Value="Trans_ChildWellCode"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="WellChild_VOIterator" id="CreateInsert2" InstanceName="Oando_AMDataControl.WellChild_VO"
+            DataControl="Oando_AMDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="WellChild_VOIterator" id="Delete1" InstanceName="Oando_AMDataControl.WellChild_VO"
+            DataControl="Oando_AMDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <listOfValues IterBinding="WellMasterVOIterator" StaticList="false" Uses="LOV_Trans_CompCode" id="Trans_CompCode"/>
+    <attributeValues IterBinding="WellMasterVOIterator" id="Trans_AssetBookName">
+      <AttrNames>
+        <Item Value="Trans_AssetBookName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WellMasterVOIterator" id="Trans_LedgerName">
+      <AttrNames>
+        <Item Value="Trans_LedgerName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WellMasterVOIterator" id="LedgerId">
+      <AttrNames>
+        <Item Value="LedgerId"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="WellMasterVOIterator" StaticList="false" Uses="LOV_Trans_WellBlockName"
+                  id="Trans_WellBlockName"/>
+  </bindings>
+</pageDefinition>

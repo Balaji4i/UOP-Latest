@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2017, Oracle and/or its affiliates. All rights reserved.
+-->
+<menu>
+    <groupNode id="OandoModule" idref="OandoModuleId" label="">
+        <!--Roles-->
+                  
+                  <itemNode id="Well" label="Well" icon="/images/grid_dot_household.png"
+                  cardIcon="/images/grid_dot_lg_bankcycle.png" taskMenuSource="/WEB-INF/taskflow/SearchWellHdrDtl_BTF.xml"
+                  securedResourceName="/WEB-INF/taskflow/SearchWellHdrDtl_BTF.xml" focusViewId="/Oando"
+                  webApp="Oando" applicationStripe="Oando" showOnHomeGrid="true" rendered="true"/>
+                  
+                   <itemNode id="UOP" label="UOP Transactions" icon="/images/grid_dot_lg_bank.png"
+                  cardIcon="/images/grid_dot_lg_bank.png" taskMenuSource="/WEB-INF/taskflow/SearchUop_BTF.xml"
+                  securedResourceName="/WEB-INF/taskflow/SearchUop_BTF.xml" focusViewId="/Oando"
+                  webApp="Oando" applicationStripe="Oando" showOnHomeGrid="true" rendered="true"/>
+                  
+                  <itemNode id="CIP" label="Capitalize CIP" icon="/images/grid_dot_lg_moneygroup.png"
+                  cardIcon="/images/grid_dot_lg_moneygroup.png" taskMenuSource="/WEB-INF/taskflow/SearchCipMaster_BTF.xml"
+                  securedResourceName="/WEB-INF/taskflow/SearchCipMaster_BTF.xml" focusViewId="/Oando"
+                  webApp="Oando" applicationStripe="Oando" showOnHomeGrid="true" rendered="true"/>
+                  
+                   <itemNode id="Retirement" label="Retire Assets" icon="/images/grid_dot_lg_persongraph.png"
+                  cardIcon="/images/grid_dot_lg_persongraph.png" taskMenuSource="/WEB-INF/taskflow/SearchRetirement_BTF.xml"
+                  securedResourceName="/WEB-INF/taskflow/SearchRetirement_BTF.xml" focusViewId="/Oando"
+                  webApp="Oando" applicationStripe="Oando" showOnHomeGrid="true" rendered="true"/>
+    </groupNode>
+</menu>

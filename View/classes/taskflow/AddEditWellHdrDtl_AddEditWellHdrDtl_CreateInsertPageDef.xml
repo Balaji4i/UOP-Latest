@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.9.14"
+                id="AddEditWellHdrDtl_AddEditWellHdrDtl_CreateInsertPageDef" Package="taskflow" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="WellMasterVO" RangeSize="25" DataControl="Oando_AMDataControl" id="WellMasterVOIterator"/>
+  </executables>
+  <bindings>
+    <action IterBinding="WellMasterVOIterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
+  </bindings>
+</pageDefinition>

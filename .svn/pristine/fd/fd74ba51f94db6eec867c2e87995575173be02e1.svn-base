@@ -1,0 +1,12 @@
+//Groovy Scripts for model.eo.Attachment_EO
+
+package model.eo
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="AttachmentId")
+def AttachmentId_ExpressionScript_Expression()
+{
+new oracle.jbo.server.SequenceImpl("XXFND_ATTACHMENT_S",adf.object.getDBTransaction()).getSequenceNumber()
+}
+

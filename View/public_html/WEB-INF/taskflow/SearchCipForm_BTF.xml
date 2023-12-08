@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="SearchCipForm_BTF">
+    <default-activity>SearchCip</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>FilmStrip</managed-bean-name>
+      <managed-bean-class>com.view.beans.filmStrip.UtilsBean</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__12">
+      <managed-bean-name>mode</managed-bean-name>
+      <managed-bean-class>java.lang.String</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__13">
+      <managed-bean-name>headerId</managed-bean-name>
+      <managed-bean-class>java.math.BigDecimal</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__16">
+      <managed-bean-name>SearchCip</managed-bean-name>
+      <managed-bean-class>view.SearchCip</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="SearchCip">
+      <page>/fragment/SearchCip.jsff</page>
+    </view>
+    <task-flow-call id="AddEditCip_BTF">
+      <task-flow-reference>
+        <document>/WEB-INF/taskflow/AddEditCip_BTF.xml</document>
+        <id>AddEditCip_BTF</id>
+      </task-flow-reference>
+      <input-parameter id="__14">
+        <name>mode</name>
+        <value>#{pageFlowScope.mode}</value>
+      </input-parameter>
+      <input-parameter id="__15">
+        <name>headerId</name>
+        <value>#{pageFlowScope.headerId}</value>
+      </input-parameter>
+    </task-flow-call>
+    <method-call id="HideFilmStrip">
+      <method>#{backingBeanScope.FilmStrip._hideFilmStrip}</method>
+      <outcome>
+        <fixed-outcome>hide</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="ShowFilmStrip">
+      <method>#{backingBeanScope.FilmStrip._showFilmStrip}</method>
+      <outcome>
+        <fixed-outcome>show</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="Execute">
+      <method>#{bindings.Execute.execute}</method>
+      <outcome>
+        <fixed-outcome>Execute</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>SearchCip</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>addEdit</from-outcome>
+        <to-activity-id>HideFilmStrip</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__4">
+      <from-activity-id>HideFilmStrip</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>hide</from-outcome>
+        <to-activity-id>AddEditCip_BTF</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>AddEditCip_BTF</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>Execute</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__8">
+      <from-activity-id>ShowFilmStrip</from-activity-id>
+      <control-flow-case id="__9">
+        <from-outcome>show</from-outcome>
+        <to-activity-id>SearchCip</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__10">
+      <from-activity-id>Execute</from-activity-id>
+      <control-flow-case id="__11">
+        <from-outcome>Execute</from-outcome>
+        <to-activity-id>ShowFilmStrip</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

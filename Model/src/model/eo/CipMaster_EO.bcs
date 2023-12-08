@@ -1,0 +1,19 @@
+//Groovy Scripts for model.eo.CipMaster_EO
+
+package model.eo
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="TransactionId")
+def TransactionId_ExpressionScript_Expression()
+{
+new oracle.jbo.server.SequenceImpl("XXFA_ASSET_CAPITALIZATION_S",adf.object.getDBTransaction()).getSequenceNumber()
+}
+
+
+@TransientValueExpression(attributeName="TransactionNum")
+def TransactionNum_ExpressionScript_Expression()
+{
+TransactionId
+}
+

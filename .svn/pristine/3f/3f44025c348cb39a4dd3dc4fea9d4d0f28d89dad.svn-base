@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="AddEditWellHdrDtl">
+    <default-activity>decider</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__13">
+      <name>mode</name>
+      <value>#{pageFlowScope.mode}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__14">
+      <name>headerId</name>
+      <value>#{pageFlowScope.headerId}</value>
+      <class>java.math.BigDecimal</class>
+    </input-parameter-definition>
+    <managed-bean id="__1">
+      <managed-bean-name>AddEditWell</managed-bean-name>
+      <managed-bean-class>view.AddEditWell</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__16">
+      <managed-bean-name>FilmStrip</managed-bean-name>
+      <managed-bean-class>com.view.beans.filmStrip.UtilsBean</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="AddEditWell">
+      <page>/fragment/AddEditWell.jsff</page>
+    </view>
+    <router id="decider">
+      <case id="__2">
+        <expression>#{pageFlowScope.mode eq 'add'}</expression>
+        <outcome>add</outcome>
+      </case>
+      <case id="__3">
+        <expression>#{pageFlowScope.mode eq 'edit'}</expression>
+        <outcome>edit</outcome>
+      </case>
+      <default-outcome>add</default-outcome>
+    </router>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="back">
+      <outcome>
+        <name>back</name>
+      </outcome>
+    </task-flow-return>
+    <method-call id="CreateInsert">
+      <method>#{bindings.CreateInsert.execute}</method>
+      <outcome>
+        <fixed-outcome>CreateInsert</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="HideFilmStrip">
+      <method>#{backingBeanScope.FilmStrip._hideFilmStrip}</method>
+      <outcome>
+        <fixed-outcome>Hide</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="HideFSEdit">
+      <method>#{backingBeanScope.FilmStrip._hideFilmStrip}</method>
+      <outcome>
+        <fixed-outcome>HideFS</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="ShowFilmStrip">
+      <method>#{backingBeanScope.FilmStrip._showFilmStrip}</method>
+      <outcome>
+        <fixed-outcome>show</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__4">
+      <from-activity-id>decider</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>edit</from-outcome>
+        <to-activity-id>ExecuteWithParams</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__5">
+        <from-outcome>add</from-outcome>
+        <to-activity-id>CreateInsert</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__9">
+      <from-activity-id>ExecuteWithParams</from-activity-id>
+      <control-flow-case id="__10">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>HideFSEdit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__11">
+      <from-activity-id>AddEditWell</from-activity-id>
+      <control-flow-case id="__12">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>ShowFilmStrip</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__7">
+      <from-activity-id>CreateInsert</from-activity-id>
+      <control-flow-case id="__8">
+        <from-outcome>CreateInsert</from-outcome>
+        <to-activity-id>HideFilmStrip</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__19">
+      <from-activity-id>HideFilmStrip</from-activity-id>
+      <control-flow-case id="__20">
+        <from-outcome>Hide</from-outcome>
+        <to-activity-id>AddEditWell</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__21">
+      <from-activity-id>HideFSEdit</from-activity-id>
+      <control-flow-case id="__22">
+        <from-outcome>HideFS</from-outcome>
+        <to-activity-id>AddEditWell</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__23">
+      <from-activity-id>ShowFilmStrip</from-activity-id>
+      <control-flow-case id="__24">
+        <from-outcome>show</from-outcome>
+        <to-activity-id>back</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

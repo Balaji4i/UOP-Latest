@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.9.14" id="addEditUopPageDef"
+                Package="fragment">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="UopMaster_VO" RangeSize="25" DataControl="Oando_AMDataControl" id="UopMaster_VOIterator"/>
+    <iterator Binds="UopLines_VO" RangeSize="10" DataControl="Oando_AMDataControl" id="UopLines_VOIterator"/>
+    <searchRegion Binds="UopLines_VOIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="UopLines_VOQuery"/>
+    <iterator Binds="JournalDetails_ROVO" RangeSize="25" DataControl="Oando_AMDataControl"
+              id="JournalDetails_ROVOIterator"/>
+  </executables>
+  <bindings>
+    <listOfValues IterBinding="UopMaster_VOIterator" StaticList="false" Uses="LOV_Trans_BusinessName"
+                  id="Trans_BusinessName"/>
+    <action id="Commit" DataControl="Oando_AMDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action IterBinding="UopMaster_VOIterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <tree IterBinding="UopLines_VOIterator" id="UopLines_VO">
+      <nodeDefinition DefName="model.vo.UopLines_VO" Name="UopLines_VO0">
+        <AttrNames>
+          <Item Value="Trans_category"/>
+          <Item Value="CcOpeningNbv"/>
+          <Item Value="CcAccuCstOpening"/>
+          <Item Value="CcPeriodAdditions"/>
+          <Item Value="CcCip"/>
+          <Item Value="CcTotalAddition"/>
+          <Item Value="CcTotAccuAssetCst"/>
+          <Item Value="CcAccuDeprOpening"/>
+          <Item Value="CcPeriodDepr"/>
+          <Item Value="CcTotAccuDepr"/>
+          <Item Value="CcNbv"/>
+          <Item Value="Trans_CatFilter"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="UopLines_VOIterator" id="UopLines_VO1">
+      <nodeDefinition DefName="model.vo.UopLines_VO" Name="UopLines_VO10">
+        <AttrNames>
+          <Item Value="Trans_category"/>
+          <Item Value="FdcOpeningNbv"/>
+          <Item Value="FdcAccuCstOpening"/>
+          <Item Value="FdcPeriodAdditions"/>
+          <Item Value="FdcCip"/>
+          <Item Value="FdcAdditionCip"/>
+          <Item Value="FdcTotAccuAssetCst"/>
+          <Item Value="FdcAccuDeprOpening"/>
+          <Item Value="FdcPeriodDepr"/>
+          <Item Value="FdcTotAccuDepr"/>
+          <Item Value="FdcNbv"/>
+          <Item Value="Trans_CatFilter"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="createUop" RequiresUpdateModel="true" Action="invokeMethod" MethodName="createUop"
+                  IsViewObjectMethod="false" DataControl="Oando_AMDataControl"
+                  InstanceName="bindings.createUop.dataControl.dataProvider"
+                  ReturnName="data.Oando_AMDataControl.methodResults.createUop_createUop_dataControl_dataProvider_createUop_result">
+      <NamedData NDName="hdrId" NDValue="#{bindings.UopDeprHdrId.inputValue}" NDType="java.math.BigDecimal"/>
+    </methodAction>
+    <attributeValues IterBinding="UopMaster_VOIterator" id="UopDeprHdrId">
+      <AttrNames>
+        <Item Value="UopDeprHdrId"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Rollback" DataControl="Oando_AMDataControl" RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <attributeValues IterBinding="UopMaster_VOIterator" id="Status">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="UopLines_VOIterator" id="UopLines_VO2">
+      <nodeDefinition DefName="model.vo.UopLines_VO" Name="UopLines_VO20">
+        <AttrNames>
+          <Item Value="Trans_category"/>
+          <Item Value="CipCost"/>
+          <Item Value="CipCaptizationCost"/>
+          <Item Value="CipClsoingBalance"/>
+          <Item Value="Trans_CatFilter"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="UopMaster_VOIterator" id="UnitsNetReserve">
+      <AttrNames>
+        <Item Value="UnitsNetReserve"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="UopMaster_VOIterator" id="ProdUnitsEquity">
+      <AttrNames>
+        <Item Value="ProdUnitsEquity"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="UopMaster_VOIterator" StaticList="false" Uses="LOV_Trans_CompCode" id="Trans_CompCode"/>
+    <attributeValues IterBinding="UopMaster_VOIterator" id="Trans_AssetBookName">
+      <AttrNames>
+        <Item Value="Trans_AssetBookName"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="UopMaster_VOIterator" StaticList="false" Uses="LOV_Trans_WellName" id="Trans_WellName"/>
+    <listOfValues IterBinding="UopMaster_VOIterator" StaticList="false" Uses="LOV_Period" id="Period"/>
+    <methodAction id="refreshUop" RequiresUpdateModel="true" Action="invokeMethod" MethodName="refreshUop"
+                  IsViewObjectMethod="false" DataControl="Oando_AMDataControl"
+                  InstanceName="bindings.refreshUop.dataControl.dataProvider"
+                  ReturnName="data.Oando_AMDataControl.methodResults.refreshUop_refreshUop_dataControl_dataProvider_refreshUop_result">
+      <NamedData NDName="hdrId" NDValue="#{bindings.UopDeprHdrId.inputValue}" NDType="java.math.BigDecimal"/>
+    </methodAction>
+    <attributeValues IterBinding="UopMaster_VOIterator" id="WellId">
+      <AttrNames>
+        <Item Value="WellId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="UopMaster_VOIterator" id="AssetBookCode">
+      <AttrNames>
+        <Item Value="AssetBookCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="UopMaster_VOIterator" id="CompanyCode">
+      <AttrNames>
+        <Item Value="CompanyCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="UopMaster_VOIterator" id="Period1">
+      <AttrNames>
+        <Item Value="Period"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="periodUop" RequiresUpdateModel="true" Action="invokeMethod" MethodName="periodUop"
+                  IsViewObjectMethod="false" DataControl="Oando_AMDataControl"
+                  InstanceName="bindings.periodUop.dataControl.dataProvider"
+                  ReturnName="data.Oando_AMDataControl.methodResults.periodUop_periodUop_dataControl_dataProvider_periodUop_result">
+      <NamedData NDName="company_code" NDValue="#{bindings.CompanyCode.inputValue}" NDType="java.lang.String"/>
+      <NamedData NDName="asset_book" NDValue="#{bindings.AssetBookCode.inputValue}" NDType="java.lang.String"/>
+      <NamedData NDName="well_id" NDValue="#{bindings.CompanyCode.inputValue}" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="period" NDValue="#{bindings.Period.inputValue}" NDType="java.lang.String"/>
+    </methodAction>
+    <button IterBinding="UopMaster_VOIterator" StaticList="true" DTSupportsMRU="false" id="GlTransferFlag">
+      <AttrNames>
+        <Item Value="GlTransferFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="UopLines_VOIterator" id="AssetCategoryId">
+      <AttrNames>
+        <Item Value="AssetCategoryId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="cipBalance" RequiresUpdateModel="true" Action="invokeMethod" MethodName="cipBalance"
+                  IsViewObjectMethod="false" DataControl="Oando_AMDataControl"
+                  InstanceName="bindings.cipBalance.dataControl.dataProvider"
+                  ReturnName="data.Oando_AMDataControl.methodResults.cipBalance_cipBalance_dataControl_dataProvider_cipBalance_result">
+      <NamedData NDName="company_code" NDValue="#{bindings.CompanyCode.inputValue}" NDType="java.lang.String"/>
+      <NamedData NDName="well_id" NDValue="#{bindings.WellId.inputValue}" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="asset_category_id" NDValue="#{bindings.AssetCategoryId.inputValue}" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="period" NDValue="#{bindings.Period.inputValue}" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="deprnReserve" RequiresUpdateModel="true" Action="invokeMethod" MethodName="deprnReserve"
+                  IsViewObjectMethod="false" DataControl="Oando_AMDataControl"
+                  InstanceName="bindings.deprnReserve.dataControl.dataProvider"
+                  ReturnName="data.Oando_AMDataControl.methodResults.deprnReserve_deprnReserve_dataControl_dataProvider_deprnReserve_result">
+      <NamedData NDName="company_code" NDValue="#{bindings.CompanyCode.inputValue}" NDType="java.lang.String"/>
+      <NamedData NDName="well_id" NDValue="#{bindings.WellId.inputValue}" NDType="java.math.BigDecimal"/>
+      <NamedData NDName="asset_category_id" NDValue="#{bindings.AssetCategoryId.inputValue}"
+                 NDType="java.math.BigDecimal"/>
+      <NamedData NDName="period" NDValue="#{bindings.Period.inputValue}" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="JournalDetails_ROVOIterator" id="JournalDetails_ROVO">
+      <nodeDefinition DefName="model.ro.JournalDetails_ROVO" Name="JournalDetails_ROVO0">
+        <AttrNames>
+          <Item Value="UopDeprHdrId"/>
+          <Item Value="AssetCategoryId"/>
+          <Item Value="JeSource"/>
+          <Item Value="PostedDate"/>
+          <Item Value="JeName"/>
+          <Item Value="JeLineNum"/>
+          <Item Value="GlAccountCode"/>
+          <Item Value="CurrencyCode"/>
+          <Item Value="EnteredDr"/>
+          <Item Value="EnteredCr"/>
+          <Item Value="AccountedDr"/>
+          <Item Value="AccountedCr"/>
+          <Item Value="GlCompanyCode"/>
+          <Item Value="GlRegionCode"/>
+          <Item Value="PtdValue"/>
+          <Item Value="PtdValueFdc"/>
+          <Item Value="PtdValueCap"/>
+          <Item Value="Description"/>
+          <Item Value="PeriodName"/>
+          <Item Value="JeCategory"/>
+          <Item Value="DateCreated"/>
+          <Item Value="DefaultEffectiveDate"/>
+          <Item Value="Status"/>
+          <Item Value="LedgerId"/>
+          <Item Value="LineDescription"/>
+          <Item Value="CodeCombinationId"/>
+          <Item Value="CodeCombination"/>
+          <Item Value="LedgerName"/>
+          <Item Value="JeHeaderId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="JournalDetails_ROVOIterator" id="JournalDetails_ROVO1">
+      <nodeDefinition DefName="model.ro.JournalDetails_ROVO" Name="JournalDetails_ROVO10">
+        <AttrNames>
+          <Item Value="UopDeprHdrId"/>
+          <Item Value="AssetCategoryId"/>
+          <Item Value="JeSource"/>
+          <Item Value="PostedDate"/>
+          <Item Value="JeName"/>
+          <Item Value="JeLineNum"/>
+          <Item Value="GlAccountCode"/>
+          <Item Value="CurrencyCode"/>
+          <Item Value="EnteredDr"/>
+          <Item Value="EnteredCr"/>
+          <Item Value="AccountedDr"/>
+          <Item Value="AccountedCr"/>
+          <Item Value="GlCompanyCode"/>
+          <Item Value="JeHeaderId"/>
+          <Item Value="GlRegionCode"/>
+          <Item Value="PtdValue"/>
+          <Item Value="PtdValueFdc"/>
+          <Item Value="PtdValueCap"/>
+          <Item Value="Description"/>
+          <Item Value="PeriodName"/>
+          <Item Value="JeCategory"/>
+          <Item Value="DateCreated"/>
+          <Item Value="DefaultEffectiveDate"/>
+          <Item Value="Status"/>
+          <Item Value="LedgerId"/>
+          <Item Value="LineDescription"/>
+          <Item Value="CodeCombinationId"/>
+          <Item Value="CodeCombination"/>
+          <Item Value="LedgerName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

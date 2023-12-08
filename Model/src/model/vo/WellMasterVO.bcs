@@ -1,0 +1,12 @@
+//Groovy Scripts for model.vo.WellMasterVO
+
+package model.vo
+
+import oracle.jbo.script.annotation.AccessorParameterExpression;
+
+@AccessorParameterExpression(accessorName="LegalEntity_ROVO", name="b_LedgerId")
+def b_LedgerId_LegalEntity_ROVO_BindVariable_BoundParameter()
+{
+LedgerId
+}
+

@@ -1,0 +1,12 @@
+//Groovy Scripts for model.eo.WellMasterEO
+
+package model.eo
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="WellId")
+def WellId_ExpressionScript_Expression()
+{
+new oracle.jbo.server.SequenceImpl("XXFA_WELL_MASTER_S",adf.object.getDBTransaction()).getSequenceNumber()
+}
+

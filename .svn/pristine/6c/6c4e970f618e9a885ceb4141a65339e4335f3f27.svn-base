@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Attachment_Retire_AS"
+  Version="12.2.1.9.14"
+  InheritPersonalization="merge">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="Retirement_EO"
+    Cardinality="1"
+    Source="true"
+    Owner="model.eo.Retirement_EO"
+    LockLevel="NONE">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="Retirement_EO"/>
+      <Attr Name="_foreignKey" Value="model.eo.Retirement_EO.RetirementEoPrimaryKey"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="model.eo.Retirement_EO.TransactionId"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="Attachment_EO"
+    Cardinality="-1"
+    Owner="model.eo.Attachment_EO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="Attachment_EO"/>
+      <Attr Name="_foreignKey" Value="model.eo.Attachment_EO.fk_Attachment_EO1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="model.eo.Attachment_EO.SourceDocumentId"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

@@ -1,0 +1,32 @@
+//Groovy Scripts for model.vo.Retirement_VO
+
+package model.vo
+
+import oracle.jbo.script.annotation.AccessorParameterExpression;
+
+@AccessorParameterExpression(accessorName="CIPAssestCategory_ROVO", name="p_period")
+def p_period_CIPAssestCategory_ROVO_BindVariable_BoundParameter()
+{
+PeriodName
+}
+
+@AccessorParameterExpression(accessorName="CIPAssestCategory_ROVO", name="p_wellId")
+def p_wellId_CIPAssestCategory_ROVO_BindVariable_BoundParameter()
+{
+WellId
+}
+
+
+@AccessorParameterExpression(accessorName="Period_Name_ROVO", name="p_well_id")
+def p_well_id_Period_Name_ROVO_BindVariable_BoundParameter()
+{
+WellId
+}
+
+
+@AccessorParameterExpression(accessorName="PeriodROVO", name="p_well_id")
+def p_well_id_PeriodROVO_BindVariable_BoundParameter()
+{
+WellId
+}
+

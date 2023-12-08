@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+    <af:pageTemplate viewId="/oracle/apps/uikit/common/pageTemplates/MainPageTemplate.jspx" id="pt1">
+        <f:facet name="pageContents">
+            <af:panelBox  id="pb1">
+                <f:facet name="toolbar"/>
+           
+            <af:panelGridLayout id="pgl1">
+                <af:gridRow marginTop="5px" height="auto" id="gr1">
+                    <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc1">
+                            <af:outputText value="CIP FORM" id="ot1" inlineStyle="font-size:large; font-weight:bold"/>
+                        </af:gridCell>
+                </af:gridRow>
+                <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+                    <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc2">
+                    <af:panelGroupLayout id="pgl2" layout="horizontal" halign="right">
+                                <af:button text="Submit" id="b2"/>
+                                <af:spacer width="10" height="10" id="s1"/>
+                                <af:button text="Save" id="b3"
+                                           actionListener="#{backingBeanScope.AddEditCip.onClickSave}"
+                                           partialSubmit="true"/>
+                                <af:spacer width="10" height="10" id="s2"/>
+                                <af:button text="Cancel" id="b1"
+                                           actionListener="#{backingBeanScope.AddEditCip.onClickCancel}"
+                                           immediate="true" action="back"></af:button>
+                            </af:panelGroupLayout>
+                    </af:gridCell>
+                </af:gridRow>
+            </af:panelGridLayout>
+               
+                <af:panelBox  id="pb2">
+                    <f:facet name="toolbar"/>
+                
+                <af:panelGroupLayout id="pgl3" layout="vertical">
+                    <af:panelFormLayout id="pfl1" labelWidth="125">
+                      <af:inputText value="#{bindings.CompanyCode.inputValue}" contentStyle="width:220px;"
+                                      label="#{bindings.CompanyCode.hints.label}"
+                                      required="#{bindings.CompanyCode.hints.mandatory}"
+                                      columns="#{bindings.CompanyCode.hints.displayWidth}"
+                                      maximumLength="#{bindings.CompanyCode.hints.precision}"
+                                      shortDesc="#{bindings.CompanyCode.hints.tooltip}" id="it1">
+                            <f:validator binding="#{bindings.CompanyCode.validator}"/>
+                        </af:inputText>
+                       </af:panelFormLayout>
+                       
+                        <af:panelGroupLayout id="pgl4" layout="horizontal">
+                            <af:panelFormLayout id="pfl2" labelWidth="127">
+                                <f:facet name="footer"/>
+                                <af:inputListOfValues id="trans_WellId" contentStyle="width:200px;"
+                                                      popupTitle="Search and Select: #{bindings.Trans_Well.hints.label}"
+                                                      value="#{bindings.Trans_Well.inputValue}"
+                                                      label="#{bindings.Trans_Well.hints.label}"
+                                                      model="#{bindings.Trans_Well.listOfValuesModel}"
+                                                      required="#{bindings.Trans_Well.hints.mandatory}"
+                                                      columns="#{bindings.Trans_Well.hints.displayWidth}"
+                                                      shortDesc="#{bindings.Trans_Well.hints.tooltip}">
+                                    <f:validator binding="#{bindings.Trans_Well.validator}"/>
+                                </af:inputListOfValues>
+                            </af:panelFormLayout>
+                            <af:spacer width="10" height="10" id="s3"/>
+                            <af:panelLabelAndMessage label="#{bindings.CurrencyCode.hints.label}" id="plam1">
+                                <af:outputText value="#{bindings.CurrencyCode.inputValue}"
+                                               shortDesc="#{bindings.CurrencyCode.hints.tooltip}" id="ot2"/>
+                            </af:panelLabelAndMessage>
+                        </af:panelGroupLayout>
+                        <af:panelFormLayout id="pfl3" labelWidth="100">
+                            <f:facet name="footer"/>
+                        <af:inputDate value="#{bindings.GlDate.inputValue}" label="#{bindings.GlDate.hints.label}"
+                                      required="#{bindings.GlDate.hints.mandatory}" contentStyle="width:220px;"
+                                      columns="#{bindings.GlDate.hints.displayWidth}"
+                                      shortDesc="#{bindings.GlDate.hints.tooltip}" id="id1">
+                            <f:validator binding="#{bindings.GlDate.validator}"/>
+                            <af:convertDateTime pattern="#{bindings.GlDate.format}"/>
+                        </af:inputDate>
+                        <af:inputText value="#{bindings.CumulativeCipCost.inputValue}"
+                                      label="#{bindings.CumulativeCipCost.hints.label}" contentStyle="width:220px;"
+                                      required="#{bindings.CumulativeCipCost.hints.mandatory}"
+                                      columns="#{bindings.CumulativeCipCost.hints.displayWidth}"
+                                      maximumLength="#{bindings.CumulativeCipCost.hints.precision}"
+                                      shortDesc="#{bindings.CumulativeCipCost.hints.tooltip}" id="it3">
+                            <f:validator binding="#{bindings.CumulativeCipCost.validator}"/>
+                            <af:convertNumber groupingUsed="false" pattern="#{bindings.CumulativeCipCost.format}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.CapitalizeAmount.inputValue}"
+                                      label="#{bindings.CapitalizeAmount.hints.label}" contentStyle="width:220px;"
+                                      required="#{bindings.CapitalizeAmount.hints.mandatory}"
+                                      columns="#{bindings.CapitalizeAmount.hints.displayWidth}"
+                                      maximumLength="#{bindings.CapitalizeAmount.hints.precision}"
+                                      shortDesc="#{bindings.CapitalizeAmount.hints.tooltip}" id="it4">
+                            <f:validator binding="#{bindings.CapitalizeAmount.validator}"/>
+                            <af:convertNumber groupingUsed="false" pattern="#{bindings.CapitalizeAmount.format}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.Status.inputValue}" label="#{bindings.Status.hints.label}"
+                                      required="#{bindings.Status.hints.mandatory}"
+                                      columns="#{bindings.Status.hints.displayWidth}" contentStyle="width:220px;"
+                                      maximumLength="#{bindings.Status.hints.precision}"
+                                      shortDesc="#{bindings.Status.hints.tooltip}" id="it5" readOnly="true">
+                            <f:validator binding="#{bindings.Status.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.Remarks.inputValue}" label="#{bindings.Remarks.hints.label}"
+                                      required="#{bindings.Remarks.hints.mandatory}"
+                                      columns="#{bindings.Remarks.hints.displayWidth}"
+                                      maximumLength="#{bindings.Remarks.hints.precision}" contentStyle="width:220px;"
+                                      shortDesc="#{bindings.Remarks.hints.tooltip}" id="it6" rows="4">
+                            <f:validator binding="#{bindings.Remarks.validator}"/>
+                        </af:inputText>
+                    </af:panelFormLayout>
+                </af:panelGroupLayout>
+                </af:panelBox>
+            </af:panelBox>
+        </f:facet>
+        <f:facet name="footerStart"/>
+        <f:facet name="footer"/>
+        <f:facet name="footerEnd"/>
+        <f:facet name="startPanel"/>
+        <f:facet name="endPanel"/>
+        <f:facet name="headerStart"/>
+        <f:facet name="header"/>
+        <f:facet name="headerEnd"/>
+    </af:pageTemplate>
+</jsp:root>

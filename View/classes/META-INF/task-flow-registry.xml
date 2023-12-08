@@ -1,0 +1,30 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<task-flow-registry xmlns="http://xmlns.oracle.com/adf/controller/rc">
+   <task-flow-descriptor path="META-INF/adfc-config.xml" id="" type="" uses-page-fragments="false" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp"/>
+   <task-flow-descriptor path="WEB-INF/taskflow/AddEditCipMaster_BTF.xml" id="AddEditCipMaster_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="mode"/>
+      <input-parameter name="headerId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflow/AddEditCip_BTF.xml" id="AddEditCip_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="mode"/>
+      <input-parameter name="headerId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflow/AddEditRetirement_BTF.xml" id="AddEditRetirement_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="mode"/>
+      <input-parameter name="headerId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflow/AddEditUop_BTF.xml" id="AddEditUop_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="mode"/>
+      <input-parameter name="headerId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflow/AddEditWellHdrDtl.xml" id="AddEditWellHdrDtl" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="mode"/>
+      <input-parameter name="headerId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/taskflow/SearchCipForm_BTF.xml" id="SearchCipForm_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp"/>
+   <task-flow-descriptor path="WEB-INF/taskflow/SearchCipMaster_BTF.xml" id="SearchCipMaster_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp"/>
+   <task-flow-descriptor path="WEB-INF/taskflow/SearchRetirement_BTF.xml" id="SearchRetirement_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp"/>
+   <task-flow-descriptor path="WEB-INF/taskflow/SearchUop_BTF.xml" id="SearchUop_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp"/>
+   <task-flow-descriptor path="WEB-INF/taskflow/SearchWellHdrDtl_BTF.xml" id="SearchWellHdrDtl_BTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp"/>
+   <task-flow-descriptor path="WEB-INF/taskflow/testingFlow.xml" id="testingFlow" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp"/>
+</task-flow-registry>

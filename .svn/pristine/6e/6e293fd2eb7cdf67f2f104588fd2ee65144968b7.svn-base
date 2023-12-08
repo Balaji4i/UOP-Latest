@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="WellsMaster_VL"
+  Version="12.2.1.9.14"
+  InheritPersonalization="merge"
+  EntityAssociation="model.association.WellsMaster_AS">
+  <ViewLinkDefEnd
+    Name="WellMasterVO"
+    Cardinality="1"
+    Source="true"
+    Owner="model.vo.WellMasterVO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="WellMasterVO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="model.vo.WellMasterVO.WellId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="WellDtlsVO"
+    Cardinality="-1"
+    Owner="model.vo.WellDtlsVO">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="WellDtlsVO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="model.vo.WellDtlsVO.WellId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+</ViewLink>
